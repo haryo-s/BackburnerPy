@@ -142,7 +142,7 @@ class Manager:
         return server_list
 
     def get_server(self, handle):
-        parsed = self._get_parsed_message(b'get pluglist 002590A4C7A60000\r\n' )
+        parsed = self._get_parsed_message(b'get server 002590A4C7A60000\r\n' )
 
         version = int(parsed[0][0].text)
         name = str(parsed[0][1].text)
@@ -190,8 +190,8 @@ class Manager:
 
         plugin_list = []
         for plugin in parsed[6]:
-            version = int(plugin[0].text)
-            name = str(plugin[1].text)
+            version = int(plugin[1].text)
+            name = str(plugin[0].text)
             description = str(plugin[2].text)
 
             plugin_data = BDC.Plugin(version, name, description)
