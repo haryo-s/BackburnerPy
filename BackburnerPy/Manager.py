@@ -1,6 +1,7 @@
 import BackburnerDataClasses as BDC
 import socket
 import xml.etree.ElementTree as ET
+import time
 
 class Manager:
     def __init__(self, _manager_ip, _manager_port):
@@ -17,8 +18,8 @@ class Manager:
         if(data.decode("utf-8") != "250 backburner 1.0 Ready.\r\n"):
             self.close_connection()
         else:
-            # Slight bodge so all commands work by requesting manager_info on connection
-            self.get_manager_info()
+            # Briefly wait for correct data transmission
+            time.sleep(0.2)
 
     def close_connection(self):
         print('Connection to manager closed')
@@ -33,20 +34,30 @@ class Manager:
         # Get the second response which includes a response code
         second_response = self.session.recv(128)
 
+        # print('First response:')
+        # print(str(first_response))
+        # print('Second response')
+        # print(str(second_response))
+
         # If the response code is 251, split the response message and get the message_length
         # TODO: Else does not work
         if int(second_response.decode("utf-8").split()[0]) == 251:
             msg_length = second_response.decode("utf-8").split()[1]
 
             final_response = self.session.recv(int(msg_length))
+            # print('Final response')
+            # print(str(final_response))
             return final_response
         else:
             return second_response
 
+    def _get_parsed_message(self, command):
+        time.sleep(0.2) # Briefly wait to stabilise the data
+        raw_message = self._send_message(command)
+        return ET.fromstring(raw_message.decode("utf-8")[:-1])
+
     def get_manager_info(self):
-        raw_message = self._send_message(b'get mgrinfo\r\n')
-        # print(raw_message)
-        parsed = ET.fromstring(raw_message.decode("utf-8")[:-1])
+        parsed = self._get_parsed_message(b'get mgrinfo\r\n')
 
         version = int(parsed[0].text)
         servers = int(parsed[1].text)
@@ -76,10 +87,10 @@ class Manager:
 
     # TODO: get_client_list has an issue where if it's the first command sent, the message length response also includes a portion of the xml data
     def get_client_list(self):
-        raw_message = self._send_message(b'get clientlist\r\n')
-        # print(raw_message)
-        parsed = ET.fromstring(raw_message.decode("utf-8")[:-1])
+        parsed = self._get_parsed_message(b'get clientlist\r\n')
+
         client_list = []
+
         for client in parsed:
             version = int(client[0].text)
             udp_port = int(client[1].text)
@@ -103,13 +114,28 @@ class Manager:
         
         return client_list
 
+    def get_plugin_list(self):
+        parsed = self._get_parsed_message(b'get pluglist\r\n')
+
+        plugin_list = []
+
+        for plugin in parsed:
+            version = int(plugin[0].text)
+            name = str(plugin[1].text)
+            description = str(plugin[2].text)
+
+            plugin_data = BDC.Plugin(version, name, description)
+            plugin_list.append(plugin_data)
+        
+        return plugin_list
 
 if __name__ == "__main__":
     manager = Manager('192.168.178.11', 3234)
     manager.open_connection()
-    # manager_info = manager.get_manager_info()
     print("")
-    manager_info = manager.get_client_list()
+    manager_info = manager.get_manager_info()
+    client_list = manager.get_client_list()
+    plugin_list = manager.get_plugin_list()
     print("")
     manager.close_connection()
 

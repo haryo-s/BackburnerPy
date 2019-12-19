@@ -52,3 +52,9 @@ class Client:
     udp_port: int
     controller: bool
     system_info: SystemInfo
+
+@dataclass
+class Plugin:
+    version: int
+    name: str
+    description: str
