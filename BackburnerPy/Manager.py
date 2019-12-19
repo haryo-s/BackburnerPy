@@ -19,7 +19,7 @@ class Manager:
             self.close_connection()
         else:
             # Briefly wait for correct data transmission
-            time.sleep(0.2)
+            time.sleep(1)
 
     def close_connection(self):
         print('Connection to manager closed')
@@ -52,7 +52,7 @@ class Manager:
             return second_response
 
     def _get_parsed_message(self, command):
-        time.sleep(0.2) # Briefly wait to stabilise the data
+        time.sleep(1) # Briefly wait to stabilise the data
         raw_message = self._send_message(command)
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
 
@@ -129,16 +129,90 @@ class Manager:
         
         return plugin_list
 
+    def get_server_list(self):
+        parsed = self._get_parsed_message(b'get srvlist\r\n')
+
+        server_list = []
+
+        for server in parsed:
+            handle = str(server[0].text)
+            state = int(server[1].text)
+            name: str(server[2].text)
+        
+        return server_list
+
+    def get_server(self, handle):
+        parsed = self._get_parsed_message(b'get pluglist 002590A4C7A60000\r\n' )
+
+        version = int(parsed[0][0].text)
+        name = str(parsed[0][1].text)
+        user_name = str(parsed[0][2].text)
+        total_task = int(parsed[0][3].text)
+        total_time = float(parsed[0][4].text)
+        perf_index = float(parsed[0][5].text)
+        ip_address = str(parsed[0][6].text)
+        current_status = int(parsed[0][7].text)
+
+        total_memory = int(parsed[1][0].text)
+        total_memory_f = float(parsed[1][1].text)
+        num_cpus = int(parsed[1][2].text)
+        platform = str(parsed[1][3].text)
+        workdisk_space = int(parsed[1][4].text)
+        mac = str(parsed[1][5].text)
+        hw_info = BDC.HardwareInfo(total_memory, total_memory_f, num_cpus, platform, workdisk_space, mac)
+
+        dropped_packets = int(parsed[2][0].text)
+        bad_packets = int(parsed[2][1].text)
+        tcp_requests = int(parsed[2][2].text)
+        udp_requests = int(parsed[2][3].text)
+        boot_time = str(parsed[2][4].text)
+        net_status = BDC.NetworkStatus(dropped_packets, bad_packets, tcp_requests, udp_requests, boot_time)
+
+        sunday = int(parsed[3][0].text)
+        monday = int(parsed[3][1].text)
+        tuesday = int(parsed[3][2].text)
+        wednesday = int(parsed[3][3].text)
+        thursday = int(parsed[3][4].text)
+        friday = int(parsed[3][5].text)
+        saturday = int(parsed[3][6].text)
+        server_schedule = BDC.ServerSchedule(sunday, monday, tuesday, wednesday, thursday, friday, saturday)
+
+        att_priority = False
+        if int(parsed[4][0].text) == 1:
+            att_priority == True
+        una_priority = False
+        if int(parsed[4][1].text) == 1:
+            att_priority == True
+
+        current_job = int(parsed[5][0].text)
+        current_task = int(parsed[5][1].text)
+        task_started = str(parsed[5][2].text)
+
+        plugin_list = []
+        for plugin in parsed[6]:
+            version = int(plugin[0].text)
+            name = str(plugin[1].text)
+            description = str(plugin[2].text)
+
+            plugin_data = BDC.Plugin(version, name, description)
+            plugin_list.append(plugin_data)
+        
+        server = BDC.Server(version, name, user_name, total_task, total_time, perf_index, ip_address, current_status, hw_info, net_status, server_schedule, att_priority, una_priority, current_job, current_task, task_started, plugin_list)
+
+        return server
 if __name__ == "__main__":
-    manager = Manager('192.168.178.11', 3234)
+    manager = Manager('192.168.0.111', 3234)
     manager.open_connection()
     print("")
-    manager_info = manager.get_manager_info()
-    client_list = manager.get_client_list()
-    plugin_list = manager.get_plugin_list()
+    # manager_info = manager.get_manager_info()
+    # client_list = manager.get_client_list()
+    # plugin_list = manager.get_plugin_list()
+    # server_list = manager.get_server_list()
+    server = manager.get_server('002590A4C7A60000')
     print("")
     manager.close_connection()
 
+    print('')
     print('')
     
     # data = manager.session.recv(1024)

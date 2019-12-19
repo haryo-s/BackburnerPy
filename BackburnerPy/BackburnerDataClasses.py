@@ -39,6 +39,15 @@ class SystemInfo:
     #     return self.num_cpus
 
 @dataclass
+class HardwareInfo:
+    total_memory: int
+    total_memory_f: float
+    num_cpus: int
+    platform: str
+    workdisk_space: int
+    mac: str
+
+@dataclass
 class BackburnerManagerInfo:
     version: int
     servers: int
@@ -58,3 +67,39 @@ class Plugin:
     version: int
     name: str
     description: str
+
+@dataclass
+class ServerSchedule:
+    sunday: int
+    monday: int
+    tuesday: int
+    wednesday: int
+    thursday: int
+    friday: int
+    saturday: int
+
+@dataclass
+class ServerListItem:
+    handle: str
+    state: int
+    name: str
+
+@dataclass 
+class Server:
+    version: int
+    name: str
+    user_name: str
+    total_task: int
+    total_time: float
+    perf_index: float
+    _ip_address: str
+    current_status: int
+    hw_info: HardwareInfo
+    network_status: NetworkStatus
+    server_schedule: ServerSchedule
+    att_priority: bool
+    una_priority: bool
+    current_job: int #TODO: Check this, it might also be a hex string
+    current_task: int
+    task_started: str
+    plugins: list
