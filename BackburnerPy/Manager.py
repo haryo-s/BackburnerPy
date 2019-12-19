@@ -34,10 +34,10 @@ class Manager:
         # Get the second response which includes a response code
         second_response = self.session.recv(128)
 
-        # print('First response:')
-        # print(str(first_response))
-        # print('Second response')
-        # print(str(second_response))
+        print('First response:')
+        print(str(first_response))
+        print('Second response')
+        print(str(second_response))
 
         # If the response code is 251, split the response message and get the message_length
         # TODO: Else does not work
@@ -45,15 +45,16 @@ class Manager:
             msg_length = second_response.decode("utf-8").split()[1]
 
             final_response = self.session.recv(int(msg_length))
-            # print('Final response')
-            # print(str(final_response))
+            print('Final response')
+            print(str(final_response))
             return final_response
         else:
             return second_response
 
     def _get_parsed_message(self, command):
-        time.sleep(1) # Briefly wait to stabilise the data
+        time.sleep(10) # Briefly wait to stabilise the data
         raw_message = self._send_message(command)
+        print(str(raw_message.decode("utf-8")[:-1]))
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
 
     def get_manager_info(self):
@@ -137,12 +138,18 @@ class Manager:
         for server in parsed:
             handle = str(server[0].text)
             state = int(server[1].text)
-            name: str(server[2].text)
+            name = str(server[2].text)
+
+            server_data = BDC.ServerListItem(handle, state, name)
+            server_list.append(server_data)
         
         return server_list
 
-    def get_server(self, handle):
-        parsed = self._get_parsed_message(b'get server 002590A4C7A60000\r\n' )
+    def get_server(self, server_handle):
+        command = bytearray(b'get jobinfo ')
+        command.extend(server_handle.encode('utf-8'))
+        command.extend(b'\r\n')
+        parsed = self._get_parsed_message(command)
 
         version = int(parsed[0][0].text)
         name = str(parsed[0][1].text)
@@ -200,6 +207,127 @@ class Manager:
         server = BDC.Server(version, name, user_name, total_task, total_time, perf_index, ip_address, current_status, hw_info, net_status, server_schedule, att_priority, una_priority, current_job, current_task, task_started, plugin_list)
 
         return server
+
+    def get_job_list(self):
+        parsed = self._get_parsed_message(b'get jobhlist\r\n')
+
+        job_list = []
+
+        for job in parsed:
+            handle = int(job[0].text)
+            state = int(job[1].text)
+
+            job_data = BDC.JobListItem(handle, state)
+            job_list.append(job_data)
+        
+        return job_list
+
+    def get_job(self, job_handle):
+        command = bytearray(b'get jobinfo ')
+        command.extend(job_handle.encode('utf-8'))
+        command.extend(b'\r\n')
+        parsed = self._get_parsed_message(command)
+
+        version = int(parsed[0][0].text)
+        job_handle = int(parsed[0][1].text)
+        name = str(parsed[0][2].text)
+        description = str(parsed[0][3].text)
+        job_priority = int(parsed[0][4].text)
+        user = str(parsed[0][5].text)
+        computer = str(parsed[0][6].text)
+        last_updated = str(parsed[0][7].text)
+        submitted = str(parsed[0][8].text)
+        started = str(parsed[0][9].text)
+        ended = str(parsed[0][10].text)
+        number_tasks = int(parsed[0][11].text)
+        tasks_completed = int(parsed[0][12].text)
+        encoding = str(parsed[0][13].text)
+        job_info = BDC.JobInfo(version, job_handle, name, description, job_priority, user, computer, last_updated, submitted, started, ended, number_tasks, tasks_completed, encoding)
+
+        active = False
+        if str(parsed[1][0].text) == 'Yes':
+            active == True
+        complete = False
+        if str(parsed[1][1].text) == 'Yes':
+            complete == True
+        nonconcurrent = False
+        if str(parsed[1][2].text) == 'Yes':
+            nonconcurrent == True
+        nonstoppable = False
+        if str(parsed[1][3].text) == 'Yes':
+            nonstoppable == True
+        ignore_job_share = False
+        if str(parsed[1][4].text) == 'Yes':
+            ignore_job_share == True
+        job_has_dependencies = False
+        if str(parsed[1][5].text) == 'Yes':
+            job_has_dependencies == True
+        zip_archive = False
+        if str(parsed[1][6].text) == 'Yes':
+            zip_archive == True
+        leave_in_queue = False
+        if str(parsed[1][7].text) == 'Yes':
+            leave_in_queue == True
+        archive_when_done = False
+        if str(parsed[1][8].text) == 'Yes':
+            archive_when_done == True
+        delete_when_done = False
+        if str(parsed[1][9].text) == 'Yes':
+            delete_when_done == True
+        override_blocking_tasks = False
+        if str(parsed[1][10].text) == 'Yes':
+            override_blocking_tasks == True
+        enable_blocking_tasks = False
+        if str(parsed[1][11].text) == 'Yes':
+            enable_blocking_tasks == True
+        job_flags = BDC.JobFlags(active, complete, nonconcurrent, nonstoppable, ignore_job_share, job_has_dependencies, zip_archive, leave_in_queue, archive_when_done, delete_when_done, override_blocking_tasks, enable_blocking_tasks)
+
+        plugin_name = str(parsed[3][0].text)
+        plugin_version = int(parsed[3][1].text)
+        job_plugin = BDC.JobPlugin(plugin_name, plugin_version)
+
+        enabled = False
+        if int(parsed[4][0].text) == 1:
+            enable_blocking_tasks == True
+        failure = False
+        if str(parsed[4][1].text) == 'Yes':
+            failure == True
+        progress = False
+        if str(parsed[4][2].text) == 'Yes':
+            progress == True
+        completion = False
+        if str(parsed[4][3].text) == 'Yes':
+            completion == True
+        nth_task = int(parsed[4][4].text)
+        send_email = False
+        if str(parsed[4][5].text) == 'Yes':
+            send_email == True
+        include_summary = False
+        if str(parsed[4][6].text) == 'Yes':
+            include_summary == True
+        email_from = str(parsed[4][7].text)
+        email_to = str(parsed[4][8].text)
+        email_server = str(parsed[4][9].text)
+        job_alerts = BDC.JobAlerts(enabled, failure, progress, completion, nth_task, send_email, include_summary, email_from, email_to, email_server)
+
+        job_server_list = []
+        for server in parsed[5]:
+            handle = str(server[0].text)
+            active = False
+            if str(server[1].text) == 'Yes':
+                active == True
+            task_time = float(server[2].text)
+            task_total = int(server[3].text)
+            context_switch = int(server[4].text)
+            rt_failed = False
+            if str(server[5].text) == "Yes":
+                rt_failed = True
+            job_server = BDC.JobServer(handle, active, task_time, task_total, context_switch, rt_failed)
+            job_server_list.append(job_server)
+
+        job = BDC.Job(job_info, job_flags, job_plugin, job_alerts, job_server_list)
+        return job
+
 if __name__ == "__main__":
     manager = Manager('192.168.0.111', 3234)
     manager.open_connection()
@@ -208,30 +336,12 @@ if __name__ == "__main__":
     # client_list = manager.get_client_list()
     # plugin_list = manager.get_plugin_list()
     # server_list = manager.get_server_list()
-    server = manager.get_server('002590A4C7A60000')
+    # server = manager.get_server('002590A4C7A60000')
+    # job_list = manager.get_job_list()
+    # job = manager.get_job('644366BB')
+    job = manager.get_job('1682138811')
     print("")
     manager.close_connection()
 
     print('')
-    print('')
     
-    # data = manager.session.recv(1024)
-    # print(data)
-    # manager.session.send(b'get mgrinfo\r\n')
-    # data = manager.session.recv(1024)
-    # print(data)
-    # data = manager.session.recv(1024)
-    # print(data)
-    # data = manager.session.recv(843)
-    # print(len(data))
-
-    # print('Parsing xml')
-    # tree = ET.fromstring(data.decode("utf-8")[:-1]) #[:-1] is to remove last character
-    # print(str(tree[0].text))
-    # print(str(tree[1].text))
-    # print(str(tree[2].text))
-    # print(str(tree[3][3].text))
-
-
-
-    # manager.session.close()

@@ -68,6 +68,82 @@ class Plugin:
     name: str
     description: str
 
+@dataclass 
+class JobListItem:
+    handle: int
+    state: int
+
+@dataclass
+class JobInfo:
+    version: int
+    job_handle: int
+    name: str
+    description: str
+    job_priority: int
+    user: str
+    computer: str
+    last_updated: str
+    submitted: str
+    started: str
+    ended: str
+    number_tasks: int
+    tasks_completed: int
+    encoding: str
+
+@dataclass 
+class JobFlags:
+    active: bool
+    complete: bool
+    nonconcurrent: bool
+    nonstoppable: bool
+    ignore_job_share: bool
+    job_has_dependencies: bool
+    zip_archive: bool
+    leave_in_queue: bool
+    archive_when_done: bool
+    delete_when_done: bool
+    override_blocking_tasks: bool
+    enable_blocking_tasks: bool
+
+@dataclass 
+class JobPlugin:
+    plugin_name: str
+    plugin_version: int
+
+@dataclass
+class JobAlerts:
+    enabled: bool
+    failure: bool
+    progress: bool
+    completion: bool
+    nth_task: int
+    send_email: bool
+    include_summary: bool
+    email_from: str
+    email_to: str
+    email_server: str
+
+@dataclass
+class JobServerList:
+    all: bool
+
+@dataclass
+class JobServer:
+    handle: str
+    active: bool
+    task_time: float
+    task_total: int
+    context_switch: int
+    rt_failed: bool
+
+@dataclass 
+class Job:
+    job_info: JobInfo
+    job_flags: JobFlags
+    plugin: JobPlugin
+    alerts: JobAlerts
+    servers: list
+
 @dataclass
 class ServerSchedule:
     sunday: int
