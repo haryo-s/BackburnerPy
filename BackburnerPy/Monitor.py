@@ -60,7 +60,7 @@ class Monitor:
         first_response = self.session.recv(128)
 
         # Get the second response which includes a response code
-        second_response = self.session.recv(128)
+        second_response = self.session.recv(32)
 
         print('First response:')
         print(str(first_response))
@@ -69,7 +69,8 @@ class Monitor:
 
         # If the response code is 251, split the response message and get the message_length
         # TODO: Else does not work
-        if int(second_response.decode("utf-8").split()[0]) == 251:
+        response_code = int(second_response.decode("utf-8").split()[0])
+        if int(response_code) == 251:
             msg_length = second_response.decode("utf-8").split()[1]
 
             final_response = self.session.recv(int(msg_length))
@@ -89,7 +90,7 @@ class Monitor:
             Parsed XML reply as an XML Element Tree
 
         """
-        time.sleep(0.2) # Briefly wait to stabilise the data
+        time.sleep(2) # Briefly wait to stabilise the data
         raw_message = self._send_message(message)
         print(str(raw_message.decode("utf-8")[:-1]))
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
@@ -410,22 +411,4 @@ class Monitor:
             job_server_list.append(job_server)
 
         job = BDC.Job(job_info, job_flags, job_plugin, job_alerts, job_server_list)
-        return job
-
-if __name__ == "__main__":
-    manager = Monitor('192.168.0.111', 3234)
-    manager.open_connection()
-    print("")
-    # manager_info = manager.get_manager_info()
-    # client_list = manager.get_client_list()
-    # plugin_list = manager.get_plugin_list()
-    # server_list = manager.get_server_list()
-    # server = manager.get_server('002590A4C7A60000')
-    # job_list = manager.get_job_list()
-    # job = manager.get_job('644366BB')
-    job = manager.get_job('1682138811')
-    print("")
-    manager.close_connection()
-
-    print('')
-    
+        return job    
