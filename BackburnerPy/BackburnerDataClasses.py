@@ -287,6 +287,14 @@ class Job:
 @dataclass
 class ServerSchedule:
     """Server schedule
+
+    Each day is assigned a 24 bit bytearray that is represented by an integer. Each bit in the array represents an hour in the day, starting from 00:00 till 23:00.
+
+    To design a schedule, simply create a 24 bit bytearray, with 1s where the server is allowed to be active, and 0s when the server has to be inactive. 
+    The following example is the server's setting for a day where the computer is inactive during office hours, i.e. from 07:00 till 18:00:
+
+    - Binary: 111111100000000000111111
+    - Decimal: 16646207
     
     Attributes:
 
