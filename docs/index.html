@@ -1,1 +1,1370 @@
-<meta http-equiv="refresh" content="0; url=https://fragrag.github.io/BackburnerPy/singlehtml/index.html">
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>BackburnerPy 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="backburnerpy">
+<h1>BackburnerPy<a class="headerlink" href="#backburnerpy" title="Permalink to this headline">¶</a></h1>
+<p>BackburnerPy is an unofficial Python API for Autodesk Backburner</p>
+</div>
+<div class="section" id="module-Monitor">
+<span id="backburnerpy-monitor"></span><h1>BackburnerPy.Monitor<a class="headerlink" href="#module-Monitor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="Monitor.Monitor">
+<em class="property">class </em><code class="sig-prename descclassname">Monitor.</code><code class="sig-name descname">Monitor</code><span class="sig-paren">(</span><em class="sig-param">_manager_ip</em>, <em class="sig-param">_manager_port</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>API class that emulates Backburner Monitor behaviour</p>
+<p>This class contains the API to interact with Backburner Manager instances by
+establishing a connection and sending requests via TCP.</p>
+<dl class="method">
+<dt id="Monitor.Monitor.open_connection">
+<code class="sig-name descname">open_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.open_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a connection with the Backburner Manager</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.close_connection">
+<code class="sig-name descname">close_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.close_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close connection with the Backburner Manager</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_manager_info">
+<code class="sig-name descname">get_manager_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_manager_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve information on the Backburner Manager</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">BackburnerManagerInfo</span></code> data class object containing the Backburner Manager information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_client_list">
+<code class="sig-name descname">get_client_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_client_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the client list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Client</span></code> data class objects for each client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_plugin_list">
+<code class="sig-name descname">get_plugin_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_plugin_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the plug-in list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code> data class objects for each client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_server_list">
+<code class="sig-name descname">get_server_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_server_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the server list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerListItem</span></code> data class objects for each client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_server">
+<code class="sig-name descname">get_server</code><span class="sig-paren">(</span><em class="sig-param">server_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve information on a particular server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>server_handle</strong> (<em>str</em>) – The handle of the server.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">Server</span></code> data class object containing information on the requested server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_job_list">
+<code class="sig-name descname">get_job_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_job_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the server list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">JobListItem</span></code> data class objects for each client</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_job">
+<code class="sig-name descname">get_job</code><span class="sig-paren">(</span><em class="sig-param">job_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve information on a particular job</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>job_handle</strong> (<em>str</em>) – The handle of the server. You might find a hex value for this, convert this first to decimal value!</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">Job</span></code> data class object containing information on the requested server</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-BackburnerDataClasses">
+<span id="backburner-backburnerdataclasses"></span><h1>Backburner.BackburnerDataClasses<a class="headerlink" href="#module-BackburnerDataClasses" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="BackburnerDataClasses.NetworkStatus">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">NetworkStatus</code><span class="sig-paren">(</span><em class="sig-param">dropped_packets: int</em>, <em class="sig-param">bad_packets: int</em>, <em class="sig-param">tcp_requests: int</em>, <em class="sig-param">udp_requests: int</em>, <em class="sig-param">_boot_time: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backburner Manager network status</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.NetworkStatus.dropped_packets">
+<code class="sig-name descname">dropped_packets</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus.dropped_packets" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.NetworkStatus.bad_packets">
+<code class="sig-name descname">bad_packets</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus.bad_packets" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.NetworkStatus.tcp_requests">
+<code class="sig-name descname">tcp_requests</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus.tcp_requests" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.NetworkStatus.udp_requests">
+<code class="sig-name descname">udp_requests</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus.udp_requests" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.NetworkStatus._boot_time">
+<code class="sig-name descname">_boot_time</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus._boot_time" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.SystemInfo">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">SystemInfo</code><span class="sig-paren">(</span><em class="sig-param">total_memory: int</em>, <em class="sig-param">total_memory_f: float</em>, <em class="sig-param">num_cpus: int</em>, <em class="sig-param">platform: str</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer_name: str</em>, <em class="sig-param">mac: str</em>, <em class="sig-param">workdisk_space: int</em>, <em class="sig-param">_ip_address: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.SystemInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backburner Manager system information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.total_memory">
+<code class="sig-name descname">total_memory</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.total_memory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.total_memory_f">
+<code class="sig-name descname">total_memory_f</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.total_memory_f" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.num_cpus">
+<code class="sig-name descname">num_cpus</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.num_cpus" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.platform">
+<code class="sig-name descname">platform</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.platform" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.user">
+<code class="sig-name descname">user</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.user" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.computer_name">
+<code class="sig-name descname">computer_name</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.computer_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.mac">
+<code class="sig-name descname">mac</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.mac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo.workdisk_space">
+<code class="sig-name descname">workdisk_space</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.workdisk_space" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.SystemInfo._ip_address">
+<code class="sig-name descname">_ip_address</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo._ip_address" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.HardwareInfo">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">HardwareInfo</code><span class="sig-paren">(</span><em class="sig-param">total_memory: int</em>, <em class="sig-param">total_memory_f: float</em>, <em class="sig-param">num_cpus: int</em>, <em class="sig-param">platform: str</em>, <em class="sig-param">workdisk_space: int</em>, <em class="sig-param">mac: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backburner Manager hardware information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.total_memory">
+<code class="sig-name descname">total_memory</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.total_memory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.total_memory_f">
+<code class="sig-name descname">total_memory_f</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.total_memory_f" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.num_cpus">
+<code class="sig-name descname">num_cpus</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.num_cpus" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.platform">
+<code class="sig-name descname">platform</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.platform" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.workdisk_space">
+<code class="sig-name descname">workdisk_space</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.workdisk_space" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.HardwareInfo.mac">
+<code class="sig-name descname">mac</code><a class="headerlink" href="#BackburnerDataClasses.HardwareInfo.mac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">BackburnerManagerInfo</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">servers: int</em>, <em class="sig-param">jobs: int</em>, <em class="sig-param">system_info: BackburnerDataClasses.SystemInfo</em>, <em class="sig-param">network_status: BackburnerDataClasses.NetworkStatus</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backburner Manager information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo.version">
+<code class="sig-name descname">version</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo.servers">
+<code class="sig-name descname">servers</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.servers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo.jobs">
+<code class="sig-name descname">jobs</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.jobs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo.system_info">
+<code class="sig-name descname">system_info</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.system_info" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.SystemInfo" title="BackburnerDataClasses.SystemInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.BackburnerManagerInfo.network_status">
+<code class="sig-name descname">network_status</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.network_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<a class="reference internal" href="#BackburnerDataClasses.NetworkStatus" title="BackburnerDataClasses.NetworkStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NetworkStatus</span></code></a>)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.Client">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Client</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">udp_port: int</em>, <em class="sig-param">controller: bool</em>, <em class="sig-param">system_info: BackburnerDataClasses.SystemInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client information</p>
+<p>Attribute:</p>
+<blockquote>
+<div><p>version (int)
+udp_port (int)
+controller (bool)
+system_info (<a class="reference internal" href="#BackburnerDataClasses.SystemInfo" title="BackburnerDataClasses.SystemInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemInfo</span></code></a>)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.Plugin">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Plugin</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">description: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plugin information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Plugin.version">
+<code class="sig-name descname">version</code><a class="headerlink" href="#BackburnerDataClasses.Plugin.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Plugin.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.Plugin.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Plugin.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#BackburnerDataClasses.Plugin.description" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobListItem">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: int</em>, <em class="sig-param">state: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobListItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job item in list</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobListItem.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobListItem.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobInfo">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobInfo</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">job_handle: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">description: str</em>, <em class="sig-param">job_priority: int</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer: str</em>, <em class="sig-param">last_updated: str</em>, <em class="sig-param">submitted: str</em>, <em class="sig-param">started: str</em>, <em class="sig-param">ended: str</em>, <em class="sig-param">number_tasks: int</em>, <em class="sig-param">tasks_completed: int</em>, <em class="sig-param">encoding: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.version">
+<code class="sig-name descname">version</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.job_handle">
+<code class="sig-name descname">job_handle</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.job_handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.description" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.job_priority">
+<code class="sig-name descname">job_priority</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.job_priority" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.user">
+<code class="sig-name descname">user</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.user" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.computer">
+<code class="sig-name descname">computer</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.computer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.last_updated">
+<code class="sig-name descname">last_updated</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.last_updated" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.submitted">
+<code class="sig-name descname">submitted</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.submitted" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.started">
+<code class="sig-name descname">started</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.started" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.ended">
+<code class="sig-name descname">ended</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.ended" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.number_tasks">
+<code class="sig-name descname">number_tasks</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.number_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.tasks_completed">
+<code class="sig-name descname">tasks_completed</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.tasks_completed" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobInfo.encoding">
+<code class="sig-name descname">encoding</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.encoding" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobFlags">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobFlags</code><span class="sig-paren">(</span><em class="sig-param">active: bool</em>, <em class="sig-param">complete: bool</em>, <em class="sig-param">nonconcurrent: bool</em>, <em class="sig-param">nonstoppable: bool</em>, <em class="sig-param">ignore_job_share: bool</em>, <em class="sig-param">job_has_dependencies: bool</em>, <em class="sig-param">zip_archive: bool</em>, <em class="sig-param">leave_in_queue: bool</em>, <em class="sig-param">archive_when_done: bool</em>, <em class="sig-param">delete_when_done: bool</em>, <em class="sig-param">override_blocking_tasks: bool</em>, <em class="sig-param">enable_blocking_tasks: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobFlags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job flags</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.active">
+<code class="sig-name descname">active</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.active" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.complete">
+<code class="sig-name descname">complete</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.complete" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.nonconcurrent">
+<code class="sig-name descname">nonconcurrent</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.nonconcurrent" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.nonstoppable">
+<code class="sig-name descname">nonstoppable</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.nonstoppable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.ignore_job_share">
+<code class="sig-name descname">ignore_job_share</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.ignore_job_share" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.job_has_dependencies">
+<code class="sig-name descname">job_has_dependencies</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.job_has_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.zip_archive">
+<code class="sig-name descname">zip_archive</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.zip_archive" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.leave_in_queue">
+<code class="sig-name descname">leave_in_queue</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.leave_in_queue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.archive_when_done">
+<code class="sig-name descname">archive_when_done</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.archive_when_done" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.delete_when_done">
+<code class="sig-name descname">delete_when_done</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.delete_when_done" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.override_blocking_tasks">
+<code class="sig-name descname">override_blocking_tasks</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.override_blocking_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobFlags.enable_blocking_tasks">
+<code class="sig-name descname">enable_blocking_tasks</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.enable_blocking_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobPlugin">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobPlugin</code><span class="sig-paren">(</span><em class="sig-param">plugin_name: str</em>, <em class="sig-param">plugin_version: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job plugin information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobPlugin.plugin_name">
+<code class="sig-name descname">plugin_name</code><a class="headerlink" href="#BackburnerDataClasses.JobPlugin.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobPlugin.plugin_version">
+<code class="sig-name descname">plugin_version</code><a class="headerlink" href="#BackburnerDataClasses.JobPlugin.plugin_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobAlerts">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobAlerts</code><span class="sig-paren">(</span><em class="sig-param">enabled: bool</em>, <em class="sig-param">failure: bool</em>, <em class="sig-param">progress: bool</em>, <em class="sig-param">completion: bool</em>, <em class="sig-param">nth_task: int</em>, <em class="sig-param">send_email: bool</em>, <em class="sig-param">include_summary: bool</em>, <em class="sig-param">email_from: str</em>, <em class="sig-param">email_to: str</em>, <em class="sig-param">email_server: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobAlerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job alert settings</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.enabled">
+<code class="sig-name descname">enabled</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.failure">
+<code class="sig-name descname">failure</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.failure" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.progress">
+<code class="sig-name descname">progress</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.progress" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.completion">
+<code class="sig-name descname">completion</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.completion" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.nth_task">
+<code class="sig-name descname">nth_task</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.nth_task" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.send_email">
+<code class="sig-name descname">send_email</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.send_email" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.include_summary">
+<code class="sig-name descname">include_summary</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.include_summary" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.email_from">
+<code class="sig-name descname">email_from</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.email_from" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.email_to">
+<code class="sig-name descname">email_to</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.email_to" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobAlerts.email_server">
+<code class="sig-name descname">email_server</code><a class="headerlink" href="#BackburnerDataClasses.JobAlerts.email_server" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobServerList">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobServerList</code><span class="sig-paren">(</span><em class="sig-param">all: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobServerList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job server list settings</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServerList.all">
+<code class="sig-name descname">all</code><a class="headerlink" href="#BackburnerDataClasses.JobServerList.all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobServer">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobServer</code><span class="sig-paren">(</span><em class="sig-param">handle: str</em>, <em class="sig-param">active: bool</em>, <em class="sig-param">task_time: float</em>, <em class="sig-param">task_total: int</em>, <em class="sig-param">context_switch: int</em>, <em class="sig-param">rt_failed: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job server information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.active">
+<code class="sig-name descname">active</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.active" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.task_time">
+<code class="sig-name descname">task_time</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.task_time" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.task_total">
+<code class="sig-name descname">task_total</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.task_total" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.context_switch">
+<code class="sig-name descname">context_switch</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.context_switch" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobServer.rt_failed">
+<code class="sig-name descname">rt_failed</code><a class="headerlink" href="#BackburnerDataClasses.JobServer.rt_failed" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.Job">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Job</code><span class="sig-paren">(</span><em class="sig-param">job_info: BackburnerDataClasses.JobInfo</em>, <em class="sig-param">job_flags: BackburnerDataClasses.JobFlags</em>, <em class="sig-param">plugin: BackburnerDataClasses.JobPlugin</em>, <em class="sig-param">alerts: BackburnerDataClasses.JobAlerts</em>, <em class="sig-param">servers: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Job information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Job.job_info">
+<code class="sig-name descname">job_info</code><a class="headerlink" href="#BackburnerDataClasses.Job.job_info" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobInfo" title="BackburnerDataClasses.JobInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Job.job_flags">
+<code class="sig-name descname">job_flags</code><a class="headerlink" href="#BackburnerDataClasses.Job.job_flags" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobFlags" title="BackburnerDataClasses.JobFlags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobFlags</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Job.plugin">
+<code class="sig-name descname">plugin</code><a class="headerlink" href="#BackburnerDataClasses.Job.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobPlugin" title="BackburnerDataClasses.JobPlugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobPlugin</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Job.alerts">
+<code class="sig-name descname">alerts</code><a class="headerlink" href="#BackburnerDataClasses.Job.alerts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobAlerts" title="BackburnerDataClasses.JobAlerts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobAlerts</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Job.servers">
+<code class="sig-name descname">servers</code><a class="headerlink" href="#BackburnerDataClasses.Job.servers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#BackburnerDataClasses.JobServer" title="BackburnerDataClasses.JobServer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobServer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.ServerSchedule">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">ServerSchedule</code><span class="sig-paren">(</span><em class="sig-param">sunday: int</em>, <em class="sig-param">monday: int</em>, <em class="sig-param">tuesday: int</em>, <em class="sig-param">wednesday: int</em>, <em class="sig-param">thursday: int</em>, <em class="sig-param">friday: int</em>, <em class="sig-param">saturday: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Server schedule</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.sunday">
+<code class="sig-name descname">sunday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.sunday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.monday">
+<code class="sig-name descname">monday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.monday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.tuesday">
+<code class="sig-name descname">tuesday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.tuesday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.wednesday">
+<code class="sig-name descname">wednesday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.wednesday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.thursday">
+<code class="sig-name descname">thursday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.thursday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.friday">
+<code class="sig-name descname">friday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.friday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerSchedule.saturday">
+<code class="sig-name descname">saturday</code><a class="headerlink" href="#BackburnerDataClasses.ServerSchedule.saturday" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.ServerListItem">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">ServerListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: str</em>, <em class="sig-param">state: int</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.ServerListItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Server item in list</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerListItem.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.ServerListItem.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerListItem.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#BackburnerDataClasses.ServerListItem.state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.ServerListItem.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.ServerListItem.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.Server">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Server</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">user_name: str</em>, <em class="sig-param">total_task: int</em>, <em class="sig-param">total_time: float</em>, <em class="sig-param">perf_index: float</em>, <em class="sig-param">_ip_address: str</em>, <em class="sig-param">current_status: int</em>, <em class="sig-param">hw_info: BackburnerDataClasses.HardwareInfo</em>, <em class="sig-param">network_status: BackburnerDataClasses.NetworkStatus</em>, <em class="sig-param">server_schedule: BackburnerDataClasses.ServerSchedule</em>, <em class="sig-param">att_priority: bool</em>, <em class="sig-param">una_priority: bool</em>, <em class="sig-param">current_job: int</em>, <em class="sig-param">current_task: int</em>, <em class="sig-param">task_started: str</em>, <em class="sig-param">plugins: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Server information</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.version">
+<code class="sig-name descname">version</code><a class="headerlink" href="#BackburnerDataClasses.Server.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.Server.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.user_name">
+<code class="sig-name descname">user_name</code><a class="headerlink" href="#BackburnerDataClasses.Server.user_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.total_task">
+<code class="sig-name descname">total_task</code><a class="headerlink" href="#BackburnerDataClasses.Server.total_task" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.total_time">
+<code class="sig-name descname">total_time</code><a class="headerlink" href="#BackburnerDataClasses.Server.total_time" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.perf_index">
+<code class="sig-name descname">perf_index</code><a class="headerlink" href="#BackburnerDataClasses.Server.perf_index" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server._ip_address">
+<code class="sig-name descname">_ip_address</code><a class="headerlink" href="#BackburnerDataClasses.Server._ip_address" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.current_status">
+<code class="sig-name descname">current_status</code><a class="headerlink" href="#BackburnerDataClasses.Server.current_status" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.hw_info">
+<code class="sig-name descname">hw_info</code><a class="headerlink" href="#BackburnerDataClasses.Server.hw_info" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.HardwareInfo" title="BackburnerDataClasses.HardwareInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HardwareInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.network_status">
+<code class="sig-name descname">network_status</code><a class="headerlink" href="#BackburnerDataClasses.Server.network_status" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.NetworkStatus" title="BackburnerDataClasses.NetworkStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NetworkStatus</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.server_schedule">
+<code class="sig-name descname">server_schedule</code><a class="headerlink" href="#BackburnerDataClasses.Server.server_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<a class="reference internal" href="#BackburnerDataClasses.ServerSchedule" title="BackburnerDataClasses.ServerSchedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerSchedule</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.att_priority">
+<code class="sig-name descname">att_priority</code><a class="headerlink" href="#BackburnerDataClasses.Server.att_priority" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.una_priority">
+<code class="sig-name descname">una_priority</code><a class="headerlink" href="#BackburnerDataClasses.Server.una_priority" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.current_job">
+<code class="sig-name descname">current_job</code><a class="headerlink" href="#BackburnerDataClasses.Server.current_job" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.current_task">
+<code class="sig-name descname">current_task</code><a class="headerlink" href="#BackburnerDataClasses.Server.current_task" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.task_started">
+<code class="sig-name descname">task_started</code><a class="headerlink" href="#BackburnerDataClasses.Server.task_started" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Server.plugins">
+<code class="sig-name descname">plugins</code><a class="headerlink" href="#BackburnerDataClasses.Server.plugins" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#BackburnerDataClasses.Plugin" title="BackburnerDataClasses.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html#document-index">BackburnerPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html#document-index">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Haryo Sukmawanto.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
