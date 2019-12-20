@@ -4,12 +4,29 @@ import xml.etree.ElementTree as ET
 import time
 
 class Manager:
+    """API class for Backburner Manager instances
+
+    This class contains the API to interact with Backburner Manager instances by 
+    establishing a connection and sending requests via TCP.
+    """
+
     def __init__(self, _manager_ip, _manager_port):
+        """Creates an instance of the Manager class
+
+        This class contains the API to interact with Backburner Manager instances by 
+        establishing a connection and sending requests via TCP.
+
+        Args:
+            _manager_ip (str): The IP Address of the Backburner Manager instance.
+            _manager_port (:obj:`int`): The TCP/IP port of the Backburner Manager instance.
+
+        """
         self.MANAGER_IP = _manager_ip
         self.MANAGER_PORT = _manager_port
         self.BUFFER_SIZE = 1024 #TODO: Default buffer size, might need to be larger
 
     def open_connection(self):
+        """Open a connection with the Backburner Manager"""
         self.session = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.session.connect((self.MANAGER_IP, self.MANAGER_PORT))
         # On opening connection, if received message is incorrect, close connection
@@ -22,11 +39,21 @@ class Manager:
             time.sleep(1)
 
     def close_connection(self):
+        """Close connection with the Backburner Manager"""
         print('Connection to manager closed')
         self.session.close()
 
-    def _send_message(self, command):
-        self.session.send(command)
+    def _send_message(self, message):
+        """Send a message to the Backburner Manager
+
+        Args:
+            message (str): Content of the message.
+
+        Returns:
+            Content of reply as raw bytes.
+
+        """
+        self.session.send(message)
 
         # This first response is 'backburner>'   
         first_response = self.session.recv(128)
@@ -51,13 +78,28 @@ class Manager:
         else:
             return second_response
 
-    def _get_parsed_message(self, command):
-        time.sleep(10) # Briefly wait to stabilise the data
-        raw_message = self._send_message(command)
+    def _get_parsed_message(self, message):
+        """Sends a message and parses the returned XML reply from Backburner Manager
+
+        Args:
+            message (str): Content of the message.
+
+        Returns:
+            Parsed XML reply as an XML Element Tree
+
+        """
+        time.sleep(0.2) # Briefly wait to stabilise the data
+        raw_message = self._send_message(message)
         print(str(raw_message.decode("utf-8")[:-1]))
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
 
     def get_manager_info(self):
+        """Retrieve information on the Backburner Manager
+
+        Returns:
+            A :obj:`BackburnerManagerInfo` data class object containing the Backburner Manager information
+
+        """
         parsed = self._get_parsed_message(b'get mgrinfo\r\n')
 
         version = int(parsed[0].text)
@@ -86,8 +128,13 @@ class Manager:
 
         return manager_info
 
-    # TODO: get_client_list has an issue where if it's the first command sent, the message length response also includes a portion of the xml data
     def get_client_list(self):
+        """Retrieve the client list
+
+        Returns:
+            A :obj:`list` of :obj:`Client` data class objects for each client
+
+        """
         parsed = self._get_parsed_message(b'get clientlist\r\n')
 
         client_list = []
@@ -116,6 +163,12 @@ class Manager:
         return client_list
 
     def get_plugin_list(self):
+        """Retrieve the plug-in list
+
+        Returns:
+            A :obj:`list` of :obj:`Plugin` data class objects for each client
+
+        """
         parsed = self._get_parsed_message(b'get pluglist\r\n')
 
         plugin_list = []
@@ -131,6 +184,12 @@ class Manager:
         return plugin_list
 
     def get_server_list(self):
+        """Retrieve the server list
+
+        Returns:
+            A :obj:`list` of :obj:`ServerListItem` data class objects for each client
+
+        """
         parsed = self._get_parsed_message(b'get srvlist\r\n')
 
         server_list = []
@@ -146,6 +205,15 @@ class Manager:
         return server_list
 
     def get_server(self, server_handle):
+        """Retrieve information on a particular server
+
+        Args:
+            server_handle (str): The handle of the server. 
+
+        Returns:
+            A :obj:`Server` data class object containing information on the requested server
+
+        """
         command = bytearray(b'get jobinfo ')
         command.extend(server_handle.encode('utf-8'))
         command.extend(b'\r\n')
@@ -209,6 +277,12 @@ class Manager:
         return server
 
     def get_job_list(self):
+        """Retrieve the server list
+
+        Returns:
+            A :obj:`list` of :obj:`JobListItem` data class objects for each client
+
+        """
         parsed = self._get_parsed_message(b'get jobhlist\r\n')
 
         job_list = []
@@ -223,6 +297,15 @@ class Manager:
         return job_list
 
     def get_job(self, job_handle):
+        """Retrieve information on a particular job
+
+        Args:
+            job_handle (str): The handle of the server. You might find a hex value for this, convert this first to decimal value!
+
+        Returns:
+            A :obj:`Job` data class object containing information on the requested server
+
+        """
         command = bytearray(b'get jobinfo ')
         command.extend(job_handle.encode('utf-8'))
         command.extend(b'\r\n')

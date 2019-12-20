@@ -3,22 +3,16 @@ import ipaddress
 
 @dataclass
 class NetworkStatus:
+    """Backburner Manager network status"""
     dropped_packets: int
     bad_packets: int
     tcp_requests: int
     udp_requests: int
     _boot_time: str
 
-    # TODO: add parser for 2019/12/18-20:27:58:0597-03
-    def get_boot_time(self):
-        return None
-        # try:
-        #     return ipaddress.ip_address(_ip_address)
-        # except:
-        #     print('IP Address is invalid')
-
 @dataclass
 class SystemInfo:
+    """Backburner Manager system information"""
     total_memory: int
     total_memory_f: float
     num_cpus: int
@@ -29,17 +23,9 @@ class SystemInfo:
     workdisk_space: int
     _ip_address: str
 
-    # def get_total_memory(self):
-    #     return self.total_memory
-    
-    # def get_total_memory_f(self):
-    #     return self.get_total_memory_f
-
-    # def get_num_cpus(self):
-    #     return self.num_cpus
-
 @dataclass
 class HardwareInfo:
+    """Backburner Manager hardware information"""
     total_memory: int
     total_memory_f: float
     num_cpus: int
@@ -49,6 +35,7 @@ class HardwareInfo:
 
 @dataclass
 class BackburnerManagerInfo:
+    """Backburner Manager information"""
     version: int
     servers: int
     jobs: int
@@ -57,6 +44,7 @@ class BackburnerManagerInfo:
 
 @dataclass 
 class Client:
+    """Client information"""
     version: int
     udp_port: int
     controller: bool
@@ -64,17 +52,20 @@ class Client:
 
 @dataclass
 class Plugin:
+    """Plugin information"""
     version: int
     name: str
     description: str
 
 @dataclass 
 class JobListItem:
+    """Job item in list"""
     handle: int
     state: int
 
 @dataclass
 class JobInfo:
+    """Job information"""
     version: int
     job_handle: int
     name: str
@@ -92,6 +83,7 @@ class JobInfo:
 
 @dataclass 
 class JobFlags:
+    """Job flags"""
     active: bool
     complete: bool
     nonconcurrent: bool
@@ -107,11 +99,13 @@ class JobFlags:
 
 @dataclass 
 class JobPlugin:
+    """Job plugin information"""
     plugin_name: str
     plugin_version: int
 
 @dataclass
 class JobAlerts:
+    """Job alert settings"""
     enabled: bool
     failure: bool
     progress: bool
@@ -125,10 +119,12 @@ class JobAlerts:
 
 @dataclass
 class JobServerList:
+    """Job server list settings"""
     all: bool
 
 @dataclass
 class JobServer:
+    """Job server information"""
     handle: str
     active: bool
     task_time: float
@@ -138,6 +134,7 @@ class JobServer:
 
 @dataclass 
 class Job:
+    """Job information"""
     job_info: JobInfo
     job_flags: JobFlags
     plugin: JobPlugin
@@ -146,6 +143,7 @@ class Job:
 
 @dataclass
 class ServerSchedule:
+    """Server schedule"""
     sunday: int
     monday: int
     tuesday: int
@@ -156,12 +154,14 @@ class ServerSchedule:
 
 @dataclass
 class ServerListItem:
+    """Server item in list"""
     handle: str
     state: int
     name: str
 
 @dataclass 
 class Server:
+    """Server information"""
     version: int
     name: str
     user_name: str
