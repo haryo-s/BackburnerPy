@@ -13,14 +13,14 @@ BackburnerPy
 
 BackburnerPy is an unofficial Python API for Autodesk Backburner
 
-Manager
-========
+BackburnerPy.Monitor
+=====================
 
-.. automodule:: Manager
+.. automodule:: Monitor
    :members:
    
-Dataclasses
-===========
+Backburner.BackburnerDataClasses
+=================================
 
 .. automodule:: BackburnerDataClasses
    :members:

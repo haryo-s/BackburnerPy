@@ -3,7 +3,16 @@ import ipaddress
 
 @dataclass
 class NetworkStatus:
-    """Backburner Manager network status"""
+    """Backburner Manager network status
+    
+    Attributes:
+        dropped_packets (int)
+        bad_packets (int)
+        tcp_requests (int)
+        udp_requests (int)
+        _boot_time (str)
+
+    """
     dropped_packets: int
     bad_packets: int
     tcp_requests: int
@@ -12,7 +21,21 @@ class NetworkStatus:
 
 @dataclass
 class SystemInfo:
-    """Backburner Manager system information"""
+    """Backburner Manager system information
+    
+    Attributes:
+
+        total_memory (int)
+        total_memory_f (float)
+        num_cpus (int)
+        platform (str)
+        user (str)
+        computer_name (str)
+        mac (str)
+        workdisk_space (int)
+        _ip_address (str)
+
+    """
     total_memory: int
     total_memory_f: float
     num_cpus: int
@@ -25,7 +48,17 @@ class SystemInfo:
 
 @dataclass
 class HardwareInfo:
-    """Backburner Manager hardware information"""
+    """Backburner Manager hardware information
+    
+    Attributes:
+        total_memory (int)
+        total_memory_f (float)
+        num_cpus (int)
+        platform (str)
+        workdisk_space (int)
+        mac (str)
+
+    """
     total_memory: int
     total_memory_f: float
     num_cpus: int
@@ -35,7 +68,16 @@ class HardwareInfo:
 
 @dataclass
 class BackburnerManagerInfo:
-    """Backburner Manager information"""
+    """Backburner Manager information
+    
+    Attributes:
+        version (int)
+        servers (int)
+        jobs (int)
+        system_info (:obj:`SystemInfo`)
+        network_status: (:obj:`NetworkStatus`)
+
+    """
     version: int
     servers: int
     jobs: int
@@ -44,7 +86,16 @@ class BackburnerManagerInfo:
 
 @dataclass 
 class Client:
-    """Client information"""
+    """Client information
+    
+    Attribute:
+
+        version (int)
+        udp_port (int)
+        controller (bool)
+        system_info (:obj:`SystemInfo`)
+    
+    """
     version: int
     udp_port: int
     controller: bool
@@ -52,20 +103,51 @@ class Client:
 
 @dataclass
 class Plugin:
-    """Plugin information"""
+    """Plugin information
+    
+    Attributes:
+        version (int)
+        name (str)
+        description (str)
+
+    """
     version: int
     name: str
     description: str
 
 @dataclass 
 class JobListItem:
-    """Job item in list"""
+    """Job item in list
+    
+    Attributes:
+        handle (int)
+        state (int)
+
+    """
     handle: int
     state: int
 
 @dataclass
 class JobInfo:
-    """Job information"""
+    """Job information
+    
+    Attributes:
+        version (int)
+        job_handle (int)
+        name (str)
+        description (str)
+        job_priority (int)
+        user (str)
+        computer (str)
+        last_updated (str)
+        submitted (str)
+        started (str)
+        ended (str)
+        number_tasks (int)
+        tasks_completed (int)
+        encoding (str)
+
+    """
     version: int
     job_handle: int
     name: str
@@ -83,7 +165,23 @@ class JobInfo:
 
 @dataclass 
 class JobFlags:
-    """Job flags"""
+    """Job flags
+    
+    Attributes:
+        active (bool)
+        complete (bool)
+        nonconcurrent (bool)
+        nonstoppable (bool)
+        ignore_job_share (bool)
+        job_has_dependencies (bool)
+        zip_archive (bool)
+        leave_in_queue (bool)
+        archive_when_done (bool)
+        delete_when_done (bool)
+        override_blocking_tasks (bool)
+        enable_blocking_tasks (bool)
+
+    """
     active: bool
     complete: bool
     nonconcurrent: bool
@@ -99,13 +197,33 @@ class JobFlags:
 
 @dataclass 
 class JobPlugin:
-    """Job plugin information"""
+    """Job plugin information
+    
+    Attributes:
+        plugin_name (str)
+        plugin_version (int)
+
+    """
     plugin_name: str
     plugin_version: int
 
 @dataclass
 class JobAlerts:
-    """Job alert settings"""
+    """Job alert settings
+    
+    Attributes:
+        enabled (bool)
+        failure (bool)
+        progress (bool)
+        completion (bool)
+        nth_task (int)
+        send_email (bool)
+        include_summary (bool)
+        email_from (str)
+        email_to (str)
+        email_server (str)
+    
+    """
     enabled: bool
     failure: bool
     progress: bool
@@ -119,12 +237,27 @@ class JobAlerts:
 
 @dataclass
 class JobServerList:
-    """Job server list settings"""
+    """Job server list settings
+
+    Attributes:
+        all (bool)
+
+    """
     all: bool
 
 @dataclass
 class JobServer:
-    """Job server information"""
+    """Job server information
+    
+    Attributes:
+        handle (str)
+        active (bool)
+        task_time (float)
+        task_total (int)
+        context_switch (int)
+        rt_failed (bool)
+
+    """
     handle: str
     active: bool
     task_time: float
@@ -134,7 +267,17 @@ class JobServer:
 
 @dataclass 
 class Job:
-    """Job information"""
+    """Job information
+    
+    Attributes:
+
+        job_info (:obj:`JobInfo`)
+        job_flags (:obj:`JobFlags`)
+        plugin (:obj:`JobPlugin`)
+        alerts (:obj:`JobAlerts`)
+        servers (:obj:`list` of :obj:`JobServer`)
+    
+    """
     job_info: JobInfo
     job_flags: JobFlags
     plugin: JobPlugin
@@ -143,7 +286,19 @@ class Job:
 
 @dataclass
 class ServerSchedule:
-    """Server schedule"""
+    """Server schedule
+    
+    Attributes:
+
+        sunday (int)
+        monday (int)
+        tuesday (int)
+        wednesday (int)
+        thursday (int)
+        friday (int)
+        saturday (int)
+
+    """
     sunday: int
     monday: int
     tuesday: int
@@ -154,14 +309,42 @@ class ServerSchedule:
 
 @dataclass
 class ServerListItem:
-    """Server item in list"""
+    """Server item in list
+    
+    Attributes:
+        handle (str)
+        state (int)
+        name (str)
+
+    """
     handle: str
     state: int
     name: str
 
 @dataclass 
 class Server:
-    """Server information"""
+    """Server information
+    
+    Attributes:
+        version (int)
+        name (str)
+        user_name (str)
+        total_task (int)
+        total_time (float)
+        perf_index (float)
+        _ip_address (str)
+        current_status (int)
+        hw_info (:obj:`HardwareInfo`)
+        network_status (:obj:`NetworkStatus`)
+        server_schedule: (:obj:`ServerSchedule`)
+        att_priority (bool)
+        una_priority (bool)
+        current_job (int)
+        current_task (int)
+        task_started (str)
+        plugins (:obj:`list` of :obj:`Plugin`))
+
+    """
     version: int
     name: str
     user_name: str

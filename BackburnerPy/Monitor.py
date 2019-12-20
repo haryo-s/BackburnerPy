@@ -1,10 +1,11 @@
-import BackburnerDataClasses as BDC
 import socket
-import xml.etree.ElementTree as ET
 import time
+import xml.etree.ElementTree as ET
 
-class Manager:
-    """API class for Backburner Manager instances
+import BackburnerDataClasses as BDC
+
+class Monitor:
+    """API class that emulates Backburner Monitor behaviour
 
     This class contains the API to interact with Backburner Manager instances by 
     establishing a connection and sending requests via TCP.
@@ -412,7 +413,7 @@ class Manager:
         return job
 
 if __name__ == "__main__":
-    manager = Manager('192.168.0.111', 3234)
+    manager = Monitor('192.168.0.111', 3234)
     manager.open_connection()
     print("")
     # manager_info = manager.get_manager_info()
