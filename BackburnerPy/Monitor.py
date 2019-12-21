@@ -36,8 +36,16 @@ class Monitor:
         if(data.decode("utf-8") != "250 backburner 1.0 Ready.\r\n"):
             self.close_connection()
         else:
-            # Briefly wait for correct data transmission
-            time.sleep(1)
+            # Briefly wait and then receive the 'backburner>' message
+            # When 'backburner>' is received, that means Manager is ready to receive commands
+            # time.sleep(0.2)
+            data = self.session.recv(11)
+            print(data.decode("utf-8"))
+
+            if(data.decode("utf-8") != "backburner>"):
+                self.close_connection()
+            # else: 
+                # time.sleep(0.2)
 
     def close_connection(self):
         """Close connection with the Backburner Manager"""
@@ -51,34 +59,37 @@ class Monitor:
             message (str): Content of the message.
 
         Returns:
-            Content of reply as raw bytes.
+            Returns a three element tuple containing the response code (int), response message (str) and the requested data (bytes).
 
         """
         self.session.send(message)
-
-        # This first response is 'backburner>'   
-        first_response = self.session.recv(128)
-
-        # Get the second response which includes a response code
-        second_response = self.session.recv(32)
+ 
+        first_response = self.session.recv(32)
 
         print('First response:')
         print(str(first_response))
-        print('Second response')
-        print(str(second_response))
 
         # If the response code is 251, split the response message and get the message_length
         # TODO: Else does not work
-        response_code = int(second_response.decode("utf-8").split()[0])
-        if int(response_code) == 251:
-            msg_length = second_response.decode("utf-8").split()[1]
+        response_code = int(first_response.decode("utf-8").split(' ', 1)[0]) # Get the response code
+        response_message = first_response.decode("utf-8").split(' ', 1)[1] # Get the response message 
 
-            final_response = self.session.recv(int(msg_length))
-            print('Final response')
-            print(str(final_response))
-            return final_response
+        if int(response_code) == 251:
+            msg_length = first_response.decode("utf-8").split()[1]
+
+            requested_data = self.session.recv(int(msg_length))
+            print('Requested data:')
+            print(str(requested_data))
+            # After all is sent, Manager will send one last packet containing 'backburner>'
+            data = self.session.recv(11)
+            print(data.decode("utf-8"))
+
+            return (response_code, response_message, requested_data)
         else:
-            return second_response
+            # After all is sent, Manager will send one last packet containing 'backburner>'
+            data = self.session.recv(11)
+            print(data.decode("utf-8"))
+            return (response_code, response_message, None)
 
     def _get_parsed_message(self, message):
         """Sends a message and parses the returned XML reply from Backburner Manager
@@ -90,8 +101,8 @@ class Monitor:
             Parsed XML reply as an XML Element Tree
 
         """
-        time.sleep(2) # Briefly wait to stabilise the data
-        raw_message = self._send_message(message)
+        # time.sleep(2) # Briefly wait to stabilise the data
+        raw_message = self._send_message(message)[2]
         print(str(raw_message.decode("utf-8")[:-1]))
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
 
