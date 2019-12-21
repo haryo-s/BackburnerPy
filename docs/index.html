@@ -7,6 +7,7 @@
     <title>BackburnerPy 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
@@ -409,7 +410,11 @@ establishing a connection and sending requests via TCP.</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.BackburnerManagerInfo.network_status">
 <code class="sig-name descname">network_status</code><a class="headerlink" href="#BackburnerDataClasses.BackburnerManagerInfo.network_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference internal" href="#BackburnerDataClasses.NetworkStatus" title="BackburnerDataClasses.NetworkStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NetworkStatus</span></code></a>)</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.NetworkStatus" title="BackburnerDataClasses.NetworkStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NetworkStatus</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -418,13 +423,46 @@ establishing a connection and sending requests via TCP.</p>
 <dt id="BackburnerDataClasses.Client">
 <em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Client</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">udp_port: int</em>, <em class="sig-param">controller: bool</em>, <em class="sig-param">system_info: BackburnerDataClasses.SystemInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Client information</p>
-<p>Attribute:</p>
-<blockquote>
-<div><p>version (int)
-udp_port (int)
-controller (bool)
-system_info (<a class="reference internal" href="#BackburnerDataClasses.SystemInfo" title="BackburnerDataClasses.SystemInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemInfo</span></code></a>)</p>
-</div></blockquote>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Client.version">
+<code class="sig-name descname">version</code><a class="headerlink" href="#BackburnerDataClasses.Client.version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Client.udp_port">
+<code class="sig-name descname">udp_port</code><a class="headerlink" href="#BackburnerDataClasses.Client.udp_port" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Client.controller">
+<code class="sig-name descname">controller</code><a class="headerlink" href="#BackburnerDataClasses.Client.controller" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.Client.system_info">
+<code class="sig-name descname">system_info</code><a class="headerlink" href="#BackburnerDataClasses.Client.system_info" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.SystemInfo" title="BackburnerDataClasses.SystemInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemInfo</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -1257,7 +1295,11 @@ The following example is the server’s setting for a day where the computer is 
 <dl class="attribute">
 <dt id="BackburnerDataClasses.Server.server_schedule">
 <code class="sig-name descname">server_schedule</code><a class="headerlink" href="#BackburnerDataClasses.Server.server_schedule" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference internal" href="#BackburnerDataClasses.ServerSchedule" title="BackburnerDataClasses.ServerSchedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerSchedule</span></code></a>)</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.ServerSchedule" title="BackburnerDataClasses.ServerSchedule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ServerSchedule</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -1315,7 +1357,7 @@ The following example is the server’s setting for a day where the computer is 
 <code class="sig-name descname">plugins</code><a class="headerlink" href="#BackburnerDataClasses.Server.plugins" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#BackburnerDataClasses.Plugin" title="BackburnerDataClasses.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code></a>)</p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#BackburnerDataClasses.Plugin" title="BackburnerDataClasses.Plugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plugin</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

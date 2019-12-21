@@ -75,7 +75,7 @@ class BackburnerManagerInfo:
         servers (int)
         jobs (int)
         system_info (:obj:`SystemInfo`)
-        network_status: (:obj:`NetworkStatus`)
+        network_status (:obj:`NetworkStatus`)
 
     """
     version: int
@@ -88,7 +88,7 @@ class BackburnerManagerInfo:
 class Client:
     """Client information
     
-    Attribute:
+    Attributes:
 
         version (int)
         udp_port (int)
@@ -344,13 +344,13 @@ class Server:
         current_status (int)
         hw_info (:obj:`HardwareInfo`)
         network_status (:obj:`NetworkStatus`)
-        server_schedule: (:obj:`ServerSchedule`)
+        server_schedule (:obj:`ServerSchedule`)
         att_priority (bool)
         una_priority (bool)
         current_job (int)
         current_task (int)
         task_started (str)
-        plugins (:obj:`list` of :obj:`Plugin`))
+        plugins (:obj:`list` of :obj:`Plugin`)
 
     """
     version: int
