@@ -1,5 +1,5 @@
+import logging
 import socket
-import time
 import xml.etree.ElementTree as ET
 
 import BackburnerDataClasses as BDC
@@ -11,7 +11,7 @@ class Monitor:
     establishing a connection and sending requests via TCP.
     """
 
-    def __init__(self, _manager_ip, _manager_port):
+    def __init__(self, _manager_ip, _manager_port, _debug = logging.INFO):
         """Creates an instance of the Manager class
 
         This class contains the API to interact with Backburner Manager instances by 
@@ -24,32 +24,28 @@ class Monitor:
         """
         self.MANAGER_IP = _manager_ip
         self.MANAGER_PORT = _manager_port
-        self.BUFFER_SIZE = 1024 #TODO: Default buffer size, might need to be larger
+        logging.basicConfig(level = _debug)
 
     def open_connection(self):
         """Open a connection with the Backburner Manager"""
         self.session = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.session.connect((self.MANAGER_IP, self.MANAGER_PORT))
+
         # On opening connection, if received message is incorrect, close connection
         data = self.session.recv(29)
-        print(data.decode("utf-8"))
+        logging.info(data.decode("utf-8"))
         if(data.decode("utf-8") != "250 backburner 1.0 Ready.\r\n"):
             self.close_connection()
         else:
-            # Briefly wait and then receive the 'backburner>' message
-            # When 'backburner>' is received, that means Manager is ready to receive commands
-            # time.sleep(0.2)
             data = self.session.recv(11)
-            print(data.decode("utf-8"))
+            logging.info(data.decode("utf-8"))
 
             if(data.decode("utf-8") != "backburner>"):
                 self.close_connection()
-            # else: 
-                # time.sleep(0.2)
 
     def close_connection(self):
         """Close connection with the Backburner Manager"""
-        print('Connection to manager closed')
+        logging.info('Connection to manager closed')
         self.session.close()
 
     def _send_message(self, message):
@@ -66,11 +62,11 @@ class Monitor:
  
         first_response = self.session.recv(32)
 
-        print('First response:')
-        print(str(first_response))
+        logging.debug('First response:')
+        logging.debug(str(first_response))
 
         # If the response code is 251, split the response message and get the message_length
-        # TODO: Else does not work
+        # TODO: Else does not seem tp work
         response_code = int(first_response.decode("utf-8").split(' ', 1)[0]) # Get the response code
         response_message = first_response.decode("utf-8").split(' ', 1)[1] # Get the response message 
 
@@ -78,17 +74,17 @@ class Monitor:
             msg_length = first_response.decode("utf-8").split()[1]
 
             requested_data = self.session.recv(int(msg_length))
-            print('Requested data:')
-            print(str(requested_data))
+            logging.debug('Requested data:')
+            logging.debug(str(requested_data))
             # After all is sent, Manager will send one last packet containing 'backburner>'
             data = self.session.recv(11)
-            print(data.decode("utf-8"))
+            logging.debug(data.decode("utf-8"))
 
             return (response_code, response_message, requested_data)
         else:
             # After all is sent, Manager will send one last packet containing 'backburner>'
             data = self.session.recv(11)
-            print(data.decode("utf-8"))
+            logging.debug(data.decode("utf-8"))
             return (response_code, response_message, None)
 
     def _get_parsed_message(self, message):
@@ -101,9 +97,8 @@ class Monitor:
             Parsed XML reply as an XML Element Tree
 
         """
-        # time.sleep(2) # Briefly wait to stabilise the data
         raw_message = self._send_message(message)[2]
-        print(str(raw_message.decode("utf-8")[:-1]))
+        logging.debug(str(raw_message.decode("utf-8")[:-1]))
         return ET.fromstring(raw_message.decode("utf-8")[:-1])
 
     def get_manager_info(self):
