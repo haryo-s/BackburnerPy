@@ -49,3 +49,7 @@ monitor.close_connection()
 ## Documentation
 
 Documentation is available here: https://fragrag.github.io/BackburnerPy/
+
+## Disclaimer
+
+This project is not affiliated with Autodesk. BackburnerPy is provided "as is" without warranty of any kind, either express or implied. Use at your own risk.
