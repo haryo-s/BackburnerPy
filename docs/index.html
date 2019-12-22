@@ -41,7 +41,7 @@
 <span id="backburnerpy-monitor"></span><h1>BackburnerPy.Monitor<a class="headerlink" href="#module-Monitor" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="Monitor.Monitor">
-<em class="property">class </em><code class="sig-prename descclassname">Monitor.</code><code class="sig-name descname">Monitor</code><span class="sig-paren">(</span><em class="sig-param">_manager_ip</em>, <em class="sig-param">_manager_port</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">Monitor.</code><code class="sig-name descname">Monitor</code><span class="sig-paren">(</span><em class="sig-param">_manager_ip</em>, <em class="sig-param">_manager_port</em>, <em class="sig-param">_debug=20</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor" title="Permalink to this definition">¶</a></dt>
 <dd><p>API class that emulates Backburner Monitor behaviour</p>
 <p>This class contains the API to interact with Backburner Manager instances by
 establishing a connection and sending requests via TCP.</p>
@@ -203,7 +203,7 @@ establishing a connection and sending requests via TCP.</p>
 
 <dl class="class">
 <dt id="BackburnerDataClasses.SystemInfo">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">SystemInfo</code><span class="sig-paren">(</span><em class="sig-param">total_memory: int</em>, <em class="sig-param">total_memory_f: float</em>, <em class="sig-param">num_cpus: int</em>, <em class="sig-param">platform: str</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer_name: str</em>, <em class="sig-param">mac: str</em>, <em class="sig-param">workdisk_space: int</em>, <em class="sig-param">_ip_address: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.SystemInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">SystemInfo</code><span class="sig-paren">(</span><em class="sig-param">total_memory: int</em>, <em class="sig-param">total_memory_f: float</em>, <em class="sig-param">num_cpus: int</em>, <em class="sig-param">platform: str</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer_name: str</em>, <em class="sig-param">mac: str</em>, <em class="sig-param">workdisk_space: int</em>, <em class="sig-param">ip_address: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.SystemInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Backburner Manager system information</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.SystemInfo.total_memory">
@@ -286,8 +286,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.SystemInfo._ip_address">
-<code class="sig-name descname">_ip_address</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo._ip_address" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.SystemInfo.ip_address">
+<code class="sig-name descname">ip_address</code><a class="headerlink" href="#BackburnerDataClasses.SystemInfo.ip_address" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
