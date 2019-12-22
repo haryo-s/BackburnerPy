@@ -9,6 +9,12 @@ class Monitor:
 
     This class contains the API to interact with Backburner Manager instances by 
     establishing a connection and sending requests via TCP.
+
+    Attributes:
+        MANAGER_IP (str): Manager IP address
+        MANAGER_PORT (int): Manager TCP port
+        logging_level (int): Verbosity log level. Defaults to `logging.INFO`. Other options include `logging.DEBUG`. See documentation of Python module `logging` for more information. 
+
     """
 
     def __init__(self, _manager_ip, _manager_port, _debug = logging.INFO):
@@ -18,13 +24,15 @@ class Monitor:
         establishing a connection and sending requests via TCP.
 
         Args:
-            _manager_ip (str): The IP Address of the Backburner Manager instance.
-            _manager_port (:obj:`int`): The TCP/IP port of the Backburner Manager instance.
+            _manager_ip (str): Backburner Manager IP address
+            _manager_port (:obj:`int`): Backburner Manager TCP port
 
         """
         self.MANAGER_IP = _manager_ip
         self.MANAGER_PORT = _manager_port
-        logging.basicConfig(level = _debug)
+        self.logging_level = _debug
+
+        logging.basicConfig(level = self.logging_level)
 
     def open_connection(self):
         """Open a connection with the Backburner Manager"""

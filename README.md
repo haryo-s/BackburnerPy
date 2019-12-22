@@ -14,29 +14,29 @@ In the future, this project might be available on PyPi.
 
 ## Usage
 
-Import BackburnerPy and create a Monitor instance. This class emulates Backburner Monitor's behaviour. Open a connection to the Backburner Manager and send commands to establish communications and when finished, close the connection, as illustrated in the following example:
+Import BackburnerPy and create a Monitor instance. This class emulates Backburner Monitor's behaviour. Open a connection to the Backburner Manager and send commands to establish communications and when finished, close the connection:
 
-The example `get_manager_information.py` illustrates the process well:
-
-
-```> python3 get_manager_information.py localhost 3234```
+`get_manager_information.py` provides an example of the process:
 
 ```Python
 import sys
+import os
 
-import BackburnerPy
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'BackburnerPy'))
+
+from Monitor import Monitor
 
 # Assign IP and Port from command line arguments
-MANAGER_IP = sys.argv[1]
-MANAGER_PORT = sys.argv[2]
+MANAGER_IP = str(sys.argv[1])
+MANAGER_PORT = int(sys.argv[2])
 
 # Initialise Monitor object
-monitor = BackburnerPy.Monitor(MANAGER_IP, MANAGER_PORT)
+monitor = Monitor(MANAGER_IP, MANAGER_PORT)
 
 # Open connection to the Manager
 monitor.open_connection()
 
-# Request Manager info. This returns a BackburnerDataClasses.BackburnerManagerInfo object
+# Request Manager info. This returns a `BackburnerPy.BackburnerDataClasses.BackburnerManagerInfo` object
 manager_info = monitor.get_manager_info()
 
 # Print the Manager's computer name
