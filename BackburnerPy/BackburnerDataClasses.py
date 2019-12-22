@@ -33,7 +33,7 @@ class SystemInfo:
         computer_name (str)
         mac (str)
         workdisk_space (int)
-        _ip_address (str)
+        ip_address (str)
 
     """
     total_memory: int
@@ -44,7 +44,10 @@ class SystemInfo:
     computer_name: str
     mac: str
     workdisk_space: int
-    _ip_address: str
+    ip_address: str
+
+    def get_ipaddress_object(self):
+        return ipaddress.ip_address(ip_address)
 
 @dataclass
 class HardwareInfo:
