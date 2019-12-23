@@ -12,8 +12,8 @@ from Monitor import Monitor
 #
 # When visiting the web service, you'll find a brief look at the Manager, the connected servers and current jobs.
 
-MANAGER_IP = sys.argv[1]
-MANAGER_PORT = sys.argv[2]
+MANAGER_IP = str(sys.argv[1])
+MANAGER_PORT = int(sys.argv[2])
 
 manager = Monitor(MANAGER_IP, MANAGER_PORT)
 
