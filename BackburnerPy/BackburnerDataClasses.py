@@ -10,14 +10,14 @@ class NetworkStatus:
         bad_packets (int)
         tcp_requests (int)
         udp_requests (int)
-        _boot_time (str)
+        boot_time (str)
 
     """
     dropped_packets: int
     bad_packets: int
     tcp_requests: int
     udp_requests: int
-    _boot_time: str
+    boot_time: str
 
 @dataclass
 class SystemInfo:
@@ -343,7 +343,7 @@ class Server:
         total_task (int)
         total_time (float)
         perf_index (float)
-        _ip_address (str)
+        ip_addressip_address (str)
         current_status (int)
         hw_info (:obj:`HardwareInfo`)
         network_status (:obj:`NetworkStatus`)
@@ -362,7 +362,7 @@ class Server:
     total_task: int
     total_time: float
     perf_index: float
-    _ip_address: str
+    ip_address: str
     current_status: int
     hw_info: HardwareInfo
     network_status: NetworkStatus
@@ -373,3 +373,6 @@ class Server:
     current_task: int
     task_started: str
     plugins: list
+
+    def get_ipaddress_object(self):
+        return ipaddress.ip_address(ip_address)
