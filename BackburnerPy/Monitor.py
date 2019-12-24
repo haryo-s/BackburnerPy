@@ -35,7 +35,12 @@ class Monitor:
         logging.basicConfig(level = self.logging_level)
 
     def open_connection(self):
-        """Open a connection with the Backburner Manager"""
+        """Open a connection with the Backburner Manager
+        
+        When opening a successful connection with Manager, it will send two packets:
+            1) "250 backburner 1.0 Ready."
+            2) "backburner>"
+        """
         self.session = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.session.connect((self.MANAGER_IP, self.MANAGER_PORT))
 
@@ -58,6 +63,13 @@ class Monitor:
 
     def _send_message(self, message):
         """Send a message to the Backburner Manager
+
+        When sending a 'get' message to Manager, it will respond with three packets:
+            1) A response that consists of a response code, and a response message. In most 'get' cases, the response message will be an integer denoting the size of the following packet
+            2) The content of the requested information
+            3) "backburner>" to denote that it has performed the requested task and has returned to its standby state.
+
+        Note that this method has only been used for 'get' operations! 'Set' operations have not been researched or developed yet.
 
         Args:
             message (str): Content of the message.
