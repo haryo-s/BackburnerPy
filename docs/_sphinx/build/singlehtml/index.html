@@ -82,6 +82,13 @@ establishing a connection and sending requests via TCP.</p>
 <dt id="Monitor.Monitor.open_connection">
 <code class="sig-name descname">open_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.open_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open a connection with the Backburner Manager</p>
+<dl class="simple">
+<dt>When opening a successful connection with Manager, it will send two packets:</dt><dd><ol class="arabic simple">
+<li><p>“250 backburner 1.0 Ready.”</p></li>
+<li><p>“backburner&gt;”</p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -180,7 +187,7 @@ establishing a connection and sending requests via TCP.</p>
 <span id="backburner-backburnerdataclasses"></span><h1>Backburner.BackburnerDataClasses<a class="headerlink" href="#module-BackburnerDataClasses" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="BackburnerDataClasses.NetworkStatus">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">NetworkStatus</code><span class="sig-paren">(</span><em class="sig-param">dropped_packets: int</em>, <em class="sig-param">bad_packets: int</em>, <em class="sig-param">tcp_requests: int</em>, <em class="sig-param">udp_requests: int</em>, <em class="sig-param">_boot_time: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">NetworkStatus</code><span class="sig-paren">(</span><em class="sig-param">dropped_packets: int</em>, <em class="sig-param">bad_packets: int</em>, <em class="sig-param">tcp_requests: int</em>, <em class="sig-param">udp_requests: int</em>, <em class="sig-param">boot_time: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>Backburner Manager network status</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.NetworkStatus.dropped_packets">
@@ -223,8 +230,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.NetworkStatus._boot_time">
-<code class="sig-name descname">_boot_time</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus._boot_time" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.NetworkStatus.boot_time">
+<code class="sig-name descname">boot_time</code><a class="headerlink" href="#BackburnerDataClasses.NetworkStatus.boot_time" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
@@ -562,7 +569,7 @@ establishing a connection and sending requests via TCP.</p>
 
 <dl class="class">
 <dt id="BackburnerDataClasses.JobInfo">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobInfo</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">job_handle: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">description: str</em>, <em class="sig-param">job_priority: int</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer: str</em>, <em class="sig-param">last_updated: str</em>, <em class="sig-param">submitted: str</em>, <em class="sig-param">started: str</em>, <em class="sig-param">ended: str</em>, <em class="sig-param">number_tasks: int</em>, <em class="sig-param">tasks_completed: int</em>, <em class="sig-param">encoding: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobInfo</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">handle: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">description: str</em>, <em class="sig-param">priority: int</em>, <em class="sig-param">user: str</em>, <em class="sig-param">computer: str</em>, <em class="sig-param">last_updated: str</em>, <em class="sig-param">submitted: str</em>, <em class="sig-param">started: str</em>, <em class="sig-param">ended: str</em>, <em class="sig-param">number_tasks: int</em>, <em class="sig-param">tasks_completed: int</em>, <em class="sig-param">encoding: str</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Job information</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.JobInfo.version">
@@ -575,8 +582,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.JobInfo.job_handle">
-<code class="sig-name descname">job_handle</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.job_handle" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.JobInfo.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.handle" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -605,8 +612,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.JobInfo.job_priority">
-<code class="sig-name descname">job_priority</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.job_priority" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.JobInfo.priority">
+<code class="sig-name descname">priority</code><a class="headerlink" href="#BackburnerDataClasses.JobInfo.priority" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -708,7 +715,7 @@ establishing a connection and sending requests via TCP.</p>
 
 <dl class="class">
 <dt id="BackburnerDataClasses.JobFlags">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobFlags</code><span class="sig-paren">(</span><em class="sig-param">active: bool</em>, <em class="sig-param">complete: bool</em>, <em class="sig-param">nonconcurrent: bool</em>, <em class="sig-param">nonstoppable: bool</em>, <em class="sig-param">ignore_job_share: bool</em>, <em class="sig-param">job_has_dependencies: bool</em>, <em class="sig-param">zip_archive: bool</em>, <em class="sig-param">leave_in_queue: bool</em>, <em class="sig-param">archive_when_done: bool</em>, <em class="sig-param">delete_when_done: bool</em>, <em class="sig-param">override_blocking_tasks: bool</em>, <em class="sig-param">enable_blocking_tasks: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobFlags" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobFlags</code><span class="sig-paren">(</span><em class="sig-param">active: bool</em>, <em class="sig-param">complete: bool</em>, <em class="sig-param">nonconcurrent: bool</em>, <em class="sig-param">nonstoppable: bool</em>, <em class="sig-param">ignore_job_share: bool</em>, <em class="sig-param">has_dependencies: bool</em>, <em class="sig-param">zip_archive: bool</em>, <em class="sig-param">leave_in_queue: bool</em>, <em class="sig-param">archive_when_done: bool</em>, <em class="sig-param">delete_when_done: bool</em>, <em class="sig-param">override_blocking_tasks: bool</em>, <em class="sig-param">enable_blocking_tasks: bool</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobFlags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Job flags</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.JobFlags.active">
@@ -761,8 +768,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.JobFlags.job_has_dependencies">
-<code class="sig-name descname">job_has_dependencies</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.job_has_dependencies" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.JobFlags.has_dependencies">
+<code class="sig-name descname">has_dependencies</code><a class="headerlink" href="#BackburnerDataClasses.JobFlags.has_dependencies" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>bool</p>
@@ -1048,11 +1055,11 @@ establishing a connection and sending requests via TCP.</p>
 
 <dl class="class">
 <dt id="BackburnerDataClasses.Job">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Job</code><span class="sig-paren">(</span><em class="sig-param">job_info: BackburnerDataClasses.JobInfo</em>, <em class="sig-param">job_flags: BackburnerDataClasses.JobFlags</em>, <em class="sig-param">plugin: BackburnerDataClasses.JobPlugin</em>, <em class="sig-param">alerts: BackburnerDataClasses.JobAlerts</em>, <em class="sig-param">servers: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Job" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Job</code><span class="sig-paren">(</span><em class="sig-param">info: BackburnerDataClasses.JobInfo</em>, <em class="sig-param">flags: BackburnerDataClasses.JobFlags</em>, <em class="sig-param">plugin: BackburnerDataClasses.JobPlugin</em>, <em class="sig-param">alerts: BackburnerDataClasses.JobAlerts</em>, <em class="sig-param">servers: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Job information</p>
 <dl class="attribute">
-<dt id="BackburnerDataClasses.Job.job_info">
-<code class="sig-name descname">job_info</code><a class="headerlink" href="#BackburnerDataClasses.Job.job_info" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.Job.info">
+<code class="sig-name descname">info</code><a class="headerlink" href="#BackburnerDataClasses.Job.info" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobInfo" title="BackburnerDataClasses.JobInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobInfo</span></code></a></p>
@@ -1061,8 +1068,8 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.Job.job_flags">
-<code class="sig-name descname">job_flags</code><a class="headerlink" href="#BackburnerDataClasses.Job.job_flags" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.Job.flags">
+<code class="sig-name descname">flags</code><a class="headerlink" href="#BackburnerDataClasses.Job.flags" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#BackburnerDataClasses.JobFlags" title="BackburnerDataClasses.JobFlags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobFlags</span></code></a></p>
@@ -1223,7 +1230,7 @@ The following example is the server’s setting for a day where the computer is 
 
 <dl class="class">
 <dt id="BackburnerDataClasses.Server">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Server</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">user_name: str</em>, <em class="sig-param">total_task: int</em>, <em class="sig-param">total_time: float</em>, <em class="sig-param">perf_index: float</em>, <em class="sig-param">_ip_address: str</em>, <em class="sig-param">current_status: int</em>, <em class="sig-param">hw_info: BackburnerDataClasses.HardwareInfo</em>, <em class="sig-param">network_status: BackburnerDataClasses.NetworkStatus</em>, <em class="sig-param">server_schedule: BackburnerDataClasses.ServerSchedule</em>, <em class="sig-param">att_priority: bool</em>, <em class="sig-param">una_priority: bool</em>, <em class="sig-param">current_job: int</em>, <em class="sig-param">current_task: int</em>, <em class="sig-param">task_started: str</em>, <em class="sig-param">plugins: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Server" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">Server</code><span class="sig-paren">(</span><em class="sig-param">version: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">user_name: str</em>, <em class="sig-param">total_task: int</em>, <em class="sig-param">total_time: float</em>, <em class="sig-param">perf_index: float</em>, <em class="sig-param">ip_address: str</em>, <em class="sig-param">current_status: int</em>, <em class="sig-param">hw_info: BackburnerDataClasses.HardwareInfo</em>, <em class="sig-param">network_status: BackburnerDataClasses.NetworkStatus</em>, <em class="sig-param">server_schedule: BackburnerDataClasses.ServerSchedule</em>, <em class="sig-param">att_priority: bool</em>, <em class="sig-param">una_priority: bool</em>, <em class="sig-param">current_job: int</em>, <em class="sig-param">current_task: int</em>, <em class="sig-param">task_started: str</em>, <em class="sig-param">plugins: list</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.Server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Server information</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.Server.version">
@@ -1286,8 +1293,8 @@ The following example is the server’s setting for a day where the computer is 
 </dd></dl>
 
 <dl class="attribute">
-<dt id="BackburnerDataClasses.Server._ip_address">
-<code class="sig-name descname">_ip_address</code><a class="headerlink" href="#BackburnerDataClasses.Server._ip_address" title="Permalink to this definition">¶</a></dt>
+<dt id="BackburnerDataClasses.Server.ip_address">
+<code class="sig-name descname">ip_address</code><a class="headerlink" href="#BackburnerDataClasses.Server.ip_address" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
@@ -1440,7 +1447,7 @@ The following example is the server’s setting for a day where the computer is 
       &copy;2019, Haryo Sukmawanto.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
