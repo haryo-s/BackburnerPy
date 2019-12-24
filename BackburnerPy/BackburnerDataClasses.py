@@ -136,10 +136,10 @@ class JobInfo:
     
     Attributes:
         version (int)
-        job_handle (int)
+        handle (int)
         name (str)
         description (str)
-        job_priority (int)
+        priority (int)
         user (str)
         computer (str)
         last_updated (str)
@@ -152,10 +152,10 @@ class JobInfo:
 
     """
     version: int
-    job_handle: int
+    handle: int
     name: str
     description: str
-    job_priority: int
+    priority: int
     user: str
     computer: str
     last_updated: str
@@ -176,7 +176,7 @@ class JobFlags:
         nonconcurrent (bool)
         nonstoppable (bool)
         ignore_job_share (bool)
-        job_has_dependencies (bool)
+        has_dependencies (bool)
         zip_archive (bool)
         leave_in_queue (bool)
         archive_when_done (bool)
@@ -190,7 +190,7 @@ class JobFlags:
     nonconcurrent: bool
     nonstoppable: bool
     ignore_job_share: bool
-    job_has_dependencies: bool
+    has_dependencies: bool
     zip_archive: bool
     leave_in_queue: bool
     archive_when_done: bool
@@ -274,15 +274,15 @@ class Job:
     
     Attributes:
 
-        job_info (:obj:`JobInfo`)
-        job_flags (:obj:`JobFlags`)
+        info (:obj:`JobInfo`)
+        flags (:obj:`JobFlags`)
         plugin (:obj:`JobPlugin`)
         alerts (:obj:`JobAlerts`)
         servers (:obj:`list` of :obj:`JobServer`)
     
     """
-    job_info: JobInfo
-    job_flags: JobFlags
+    info: JobInfo
+    flags: JobFlags
     plugin: JobPlugin
     alerts: JobAlerts
     servers: list
@@ -343,7 +343,7 @@ class Server:
         total_task (int)
         total_time (float)
         perf_index (float)
-        ip_addressip_address (str)
+        ip_address (str)
         current_status (int)
         hw_info (:obj:`HardwareInfo`)
         network_status (:obj:`NetworkStatus`)
