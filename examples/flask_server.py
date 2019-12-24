@@ -1,5 +1,6 @@
 import sys
 import os
+import logging
 from flask import Flask
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'BackburnerPy'))
@@ -11,11 +12,14 @@ from Monitor import Monitor
 # For example: `python flask_server.py "127.0.0.1" 3234`
 #
 # When visiting the web service, you'll find a brief look at the Manager, the connected servers and current jobs.
+try:
+    MANAGER_IP = str(sys.argv[1])
+    MANAGER_PORT = int(sys.argv[2])
+except:
+    print("Incorrect arguments.")
+    
 
-MANAGER_IP = str(sys.argv[1])
-MANAGER_PORT = int(sys.argv[2])
-
-manager = Monitor(MANAGER_IP, MANAGER_PORT)
+manager = Monitor(MANAGER_IP, MANAGER_PORT, logging.INFO)
 
 HEAD = """
 <head>
@@ -60,14 +64,18 @@ def index():
     server_html_list = "<p class=\"\">\n<h2>\n" + "Servers:" + "</h2>\n</p>\n"
     server_html_list += "<ul class=\"\" style=\"\">\n"
     for item in server_list:
-        server_html_list += "<li class=\"\">" + str(item.name) + "</li>\n"
+        server_html_list += f"<li class=\"\"> {item.name} </li>\n"
     server_html_list += "</ul>\n"
     
     job_list = manager.get_job_list()
+    jobs = []
+    for job in job_list:
+        jobs.append(manager.get_job(str(job.handle)))
+
     job_html_list = "<h2>\n" + "Jobs:" + "</h2>\n"
     job_html_list += "<ul class=\"\" style=\"\">\n"
-    for item in job_list:
-        job_html_list += "<li class=\"\">" + str(item.handle) + "</li>\n"
+    for job in jobs:
+        job_html_list += f"<li class=\"\"> {job.name}: {job.job_info.tasks_completed}/{job.job_info.number_tasks}</li>\n"
     job_html_list += "</ul>\n"
 
     html = HEAD + manager_html + server_html_list + job_html_list

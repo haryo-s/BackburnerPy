@@ -6,8 +6,11 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'BackburnerPy'))
 from Monitor import Monitor
 
 # Assign IP and Port from command line arguments
-MANAGER_IP = str(sys.argv[1])
-MANAGER_PORT = int(sys.argv[2])
+try:
+    MANAGER_IP = str(sys.argv[1])
+    MANAGER_PORT = int(sys.argv[2])
+except:
+    print("Incorrect arguments.")
 
 # Initialise Monitor object
 monitor = Monitor(MANAGER_IP, MANAGER_PORT)
