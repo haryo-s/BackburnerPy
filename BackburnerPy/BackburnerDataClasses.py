@@ -118,9 +118,32 @@ class Plugin:
     name: str
     description: str
 
+@dataclass
+class JobArchiveListItem:
+    """
+
+    Attributes:
+        handle (int)
+        name (str)
+        user (str)
+        description (str)
+        submission_date (str)
+        end_job_date (str)
+        plugin_name (str)
+        plugin_version (int)
+    """
+    handle: int
+    name: str
+    user: str
+    description: str
+    submission_date: str
+    end_job_date: str
+    plugin_name: str
+    plugin_version: int
+
 @dataclass 
-class JobListItem:
-    """Job item in list
+class JobHandleListItem:
+    """Item in Job Handle List
     
     Attributes:
         handle (int)
@@ -129,6 +152,24 @@ class JobListItem:
     """
     handle: int
     state: int
+
+@dataclass
+class JobListItem:
+    """Item in Job List
+
+    Attributes:
+        handle (int)
+        state (int)
+        name (str)
+        plugin_name (str)
+        plugin_version (int)
+
+    """
+    handle: int
+    state: int
+    name: str
+    plugin_name: str
+    plugin_version: int
 
 @dataclass
 class JobInfo:

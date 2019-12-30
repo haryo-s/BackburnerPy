@@ -75,7 +75,7 @@ def index():
     job_html_list = "<h2>\n" + "Jobs:" + "</h2>\n"
     job_html_list += "<ul class=\"\" style=\"\">\n"
     for job in jobs:
-        job_html_list += f"<li class=\"\"> {job.name}: {job.job_info.tasks_completed}/{job.job_info.number_tasks}</li>\n"
+        job_html_list += f"<li class=\"\"> {job.job_info.name}: {job.job_info.tasks_completed}/{job.job_info.number_tasks}</li>\n"
     job_html_list += "</ul>\n"
 
     html = HEAD + manager_html + server_html_list + job_html_list

@@ -39,7 +39,7 @@ class Monitor:
         
         When opening a successful connection with Manager, it will send two packets:
             1) "250 backburner 1.0 Ready."
-            2) "backburner>"
+            2) "backburner>" or 'backburner(Controller)>'
         """
         self.session = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.session.connect((self.MANAGER_IP, self.MANAGER_PORT))
@@ -50,10 +50,10 @@ class Monitor:
         if(data.decode("utf-8") != "250 backburner 1.0 Ready.\r\n"):
             self.close_connection()
         else:
-            data = self.session.recv(11)
+            data = self.session.recv(23)
             logging.info(data.decode("utf-8"))
 
-            if(data.decode("utf-8") != "backburner>"):
+            if(data.decode("utf-8") != "backburner>" or 'backburner(Controller)>'):
                 self.close_connection()
 
     def close_connection(self):
@@ -67,7 +67,7 @@ class Monitor:
         When sending a 'get' message to Manager, it will respond with three packets:
             1) A response that consists of a response code, and a response message. In most 'get' cases, the response message will be an integer denoting the size of the following packet
             2) The content of the requested information
-            3) "backburner>" to denote that it has performed the requested task and has returned to its standby state.
+            3) "backburner>" or "backburner(Controller)>" to denote that it has performed the requested task and has returned to its standby state.
 
         Note that this method has only been used for 'get' operations! 'Set' operations have not been researched or developed yet.
 
@@ -96,14 +96,14 @@ class Monitor:
             requested_data = self.session.recv(int(msg_length))
             logging.debug('Requested data:')
             logging.debug(str(requested_data))
-            # After all is sent, Manager will send one last packet containing 'backburner>'
-            data = self.session.recv(11)
+            # After all is sent, Manager will send one last packet containing 'backburner>' or 'backburner(Controller)>'
+            data = self.session.recv(23)
             logging.debug(data.decode("utf-8"))
 
             return (response_code, response_message, requested_data)
         else:
-            # After all is sent, Manager will send one last packet containing 'backburner>'
-            data = self.session.recv(11)
+            # After all is sent, Manager will send one last packet containing 'backburner>' or 'backburner(Controller)>'
+            data = self.session.recv(23)
             logging.debug(data.decode("utf-8"))
             return (response_code, response_message, None)
 
@@ -304,22 +304,45 @@ class Monitor:
 
         return server
 
-    def get_job_list(self):
-        """Retrieve the server list
+    def get_job_handle_list(self):
+        """Retrieve the job handle list
 
         Returns:
-            A :obj:`list` of :obj:`JobListItem` data class objects for each client
+            A :obj:`list` of :obj:`JobHandleListItem` data class objects for each job
 
         """
         parsed = self._get_parsed_message(b'get jobhlist\r\n')
+
+        job_handle_list = []
+
+        for job in parsed:
+            handle = int(job[0].text)
+            state = int(job[1].text)
+
+            job_data = BDC.JobHandleListItem(handle, state)
+            job_handle_list.append(job_data)
+        
+        return job_handle_list
+
+    def get_job_list(self):
+        """Retrieve the job list
+
+        Returns:
+            A :obj:`list` of :obj:`JobListItem` data class objects for each job
+
+        """
+        parsed = self._get_parsed_message(b'get joblist\r\n')
 
         job_list = []
 
         for job in parsed:
             handle = int(job[0].text)
             state = int(job[1].text)
+            name = str(job[2].text)
+            plugin_name = str(job[3].text)
+            plugin_version = int(job[3].text)
 
-            job_data = BDC.JobListItem(handle, state)
+            job_data = BDC.JobListItem(handle, state, name, plugin_name, plugin_version)
             job_list.append(job_data)
         
         return job_list
@@ -438,3 +461,52 @@ class Monitor:
 
         job = BDC.Job(job_info, job_flags, job_plugin, job_alerts, job_server_list)
         return job    
+
+    def get_taskname(self, job_handle):
+        '''TODO: Research and implement this fucntion'''
+        
+        return None
+
+    def del_controller(self, state):
+        '''TODO: Research and implement this function
+        
+        It seems that this command happens in conjuction when adjusting the state of a job, e.g:
+
+        >del controller Yes
+        >set jobstate 1256275308 1
+        >del controller No
+
+        What del exactly means or what it does is slightly unclear
+        '''
+
+    def get_jobarchive(self):
+        """Retrieve the job archive list
+
+        Returns:
+            A :obj:`list` of :obj:`JobArchiveListItem` data class objects for each job
+
+        """
+        parsed = self._get_parsed_message(b'get jobarchive\r\n')
+
+        job_archive_list = []
+
+        for job in parsed:
+            handle = int(job[0].text)
+            name = str(job[1].text)
+            user = str(job[2].text)
+            description = str(job[3].text)
+            sub_date = str(job[4].text)
+            end_date = str(job[5].text)
+            plugin_name = str(job[6].text)
+            plugin_version = int(job[7].text)
+
+            job_data = BDC.JobArchiveListItem(handle, name, user, description, sub_date, end_date, plugin_name, plugin_version)
+            job_archive_list.append(job_data)
+        
+        return job_archive_list
+
+    def set_jobarchive(self, job_handle):
+        """Send or retrieve specified job to or from job archive
+
+        TODO: Implement this function
+        """
