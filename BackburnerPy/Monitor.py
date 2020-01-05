@@ -48,12 +48,14 @@ class Monitor:
         data = self.session.recv(29)
         logging.info(data.decode("utf-8"))
         if(data.decode("utf-8") != "250 backburner 1.0 Ready.\r\n"):
+            logging.info("Incorrect response. Closing connection!")
             self.close_connection()
         else:
             data = self.session.recv(23)
             logging.info(data.decode("utf-8"))
 
-            if(data.decode("utf-8") != "backburner>" or 'backburner(Controller)>'):
+            if(data.decode("utf-8") != "backburner>" and data.decode("utf-8") != 'backburner(Controller)>'):
+                logging.info("Incorrect console initialisation. Closing connection!")
                 self.close_connection()
 
     def close_connection(self):
@@ -78,6 +80,8 @@ class Monitor:
             Returns a three element tuple containing the response code (int), response message (str) and the requested data (bytes).
 
         """
+        logging.debug('Message')
+        logging.debug(str(message))
         self.session.send(message)
  
         first_response = self.session.recv(32)
@@ -118,7 +122,7 @@ class Monitor:
             A :obj:`BackburnerManagerInfo` data class object containing the Backburner Manager information
 
         """
-        parsed = self._send_message(b'get mgrinfo\r\n')
+        parsed = self._send_message(b'get mgrinfo\r\n')[2]
 
         version = int(parsed[0].text)
         servers = int(parsed[1].text)
@@ -153,7 +157,7 @@ class Monitor:
             A :obj:`list` of :obj:`Client` data class objects for each client
 
         """
-        parsed = self._send_message(b'get clientlist\r\n')
+        parsed = self._send_message(b'get clientlist\r\n')[2]
 
         client_list = []
 
@@ -187,7 +191,7 @@ class Monitor:
             A :obj:`list` of :obj:`Plugin` data class objects for each client
 
         """
-        parsed = self._send_message(b'get pluglist\r\n')
+        parsed = self._send_message(b'get pluglist\r\n')[2]
 
         plugin_list = []
 
@@ -208,7 +212,7 @@ class Monitor:
             A :obj:`list` of :obj:`ServerListItem` data class objects for each client
 
         """
-        parsed = self._send_message(b'get srvlist\r\n')
+        parsed = self._send_message(b'get srvlist\r\n')[2]
 
         server_list = []
 
@@ -235,7 +239,7 @@ class Monitor:
         command = bytearray(b'get jobinfo ')
         command.extend(server_handle.encode('utf-8'))
         command.extend(b'\r\n')
-        parsed = self._send_message(command)
+        parsed = self._send_message(command)[2]
 
         version = int(parsed[0][0].text)
         name = str(parsed[0][1].text)
@@ -301,7 +305,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobHandleListItem` data class objects for each job
 
         """
-        parsed = self._send_message(b'get jobhlist\r\n')
+        parsed = self._send_message(b'get jobhlist\r\n')[2]
 
         job_handle_list = []
 
@@ -321,7 +325,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobListItem` data class objects for each job
 
         """
-        parsed = self._send_message(b'get joblist\r\n')
+        parsed = self._send_message(b'get joblist\r\n')[2]
 
         job_list = []
 
@@ -350,7 +354,7 @@ class Monitor:
         command = bytearray(b'get jobinfo ')
         command.extend(job_handle.encode('utf-8'))
         command.extend(b'\r\n')
-        parsed = self._send_message(command)
+        parsed = self._send_message(command)[2]
 
         version = int(parsed[0][0].text)
         job_handle = int(parsed[0][1].text)
@@ -454,7 +458,7 @@ class Monitor:
 
     def get_jobstate(self, job_handle):
         '''TODO: Research and implement this function'''
-        
+
         return None
 
     def get_taskname(self, job_handle):
@@ -469,7 +473,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobArchiveListItem` data class objects for each job
 
         """
-        parsed = self._send_message(b'get jobarchive\r\n')
+        parsed = self._send_message(b'get jobarchive\r\n')[2]
 
         job_archive_list = []
 
