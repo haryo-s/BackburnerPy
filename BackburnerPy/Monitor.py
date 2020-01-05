@@ -457,9 +457,44 @@ class Monitor:
         return job    
 
     def get_jobstate(self, job_handle):
-        '''TODO: Research and implement this function'''
+        """Gets the state of specified job
 
-        return None
+        Jobstates:
+            0 Completed
+            1 Not started
+            2 Active
+            3 Suspended (presumably)
+
+        Args:
+            job_handle (str): The handle of the server. You might find a hex value for this, convert this first to decimal value!
+            jobstate (int): Jobstate as int. TODO: Find out values of jobstates
+
+        Returns:
+            Returns a three element tuple containing the response code (int), job state as int (str) and empty requested data (bytes).
+
+        """
+
+        return self._send_message(bytes(f'get jobstate {str(job_handle)}'))
+
+    def set_jobstate(self, job_handle, jobstate):
+        """Sets the state of specified job
+
+        Jobstates:
+            0 Completed
+            1 Not started
+            2 Active
+            3 Suspended (presumably)
+
+        Args:
+            job_handle (str): The handle of the server. You might find a hex value for this, convert this first to decimal value!
+            jobstate (int): Jobstate as int. TODO: Find out values of jobstates
+
+        Returns:
+            Returns a three element tuple containing the response code (int), response message (str) and empty requested data (bytes). If succesful, the response will be '200 OK'
+
+        """
+
+        return self._send_message(bytes(f'set jobstate {str(job_handle)} {str(jobstate)}'))
 
     def get_taskname(self, job_handle):
         '''TODO: Research and implement this function'''
