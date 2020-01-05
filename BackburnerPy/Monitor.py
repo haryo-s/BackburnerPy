@@ -92,9 +92,11 @@ class Monitor:
         if int(response_code) == 251: # If the response code is 251, split the response message and get the message_length
             msg_length = first_response.decode("utf-8").split()[1]
 
-            requested_data = self.session.recv(int(msg_length))
+            raw_requested_data = self.session.recv(int(msg_length))
+            requested_data = ET.fromstring(raw_requested_data.decode("utf-8")[:-1])
             logging.debug('Requested data:')
             logging.debug(str(requested_data))
+
             # After all is sent, Manager will send one last packet containing 'backburner>' or 'backburner(Controller)>'
             data = self.session.recv(23)
             logging.debug(data.decode("utf-8"))
@@ -109,42 +111,6 @@ class Monitor:
 
             return (response_code, response_message, None)
 
-    def _send_get_command(self, message, raw=False):
-        """Sends a get command and returns the reply from Backburner Manager
-
-        Args:
-            message (str): Content of the message.
-            raw (bool): If true, the reply will be returned as raw bytes. Defaults to false
-
-        Returns:
-            Parsed XML reply as an XML Element Tree unless the `raw` argument is true, then the reply will be returned as raw bytes
-
-        """
-        raw_message = self._send_message(message)[2]
-
-        if raw == True:
-            return raw_message
-        else:
-            logging.debug(str(raw_message.decode("utf-8")[:-1]))
-            return ET.fromstring(raw_message.decode("utf-8")[:-1])
-
-    def _send_set_command(self, message):
-        """Sends a set message and returns the response code and message
-
-        Args:
-            message (str): Content of the message.
-
-        Returns:
-            Returns a three element tuple containing the response code (int), response message (str).
-
-        """
-        response_code, response_message, requested_data = self._send_message(message)
-
-        logging.debug(str(response_code + ': ' + response_message))
-
-        if requested_data == None:
-            return (response_code, response_message)
-
     def get_manager_info(self):
         """Retrieve information on the Backburner Manager
 
@@ -152,7 +118,7 @@ class Monitor:
             A :obj:`BackburnerManagerInfo` data class object containing the Backburner Manager information
 
         """
-        parsed = self._send_get_command(b'get mgrinfo\r\n')
+        parsed = self._send_message(b'get mgrinfo\r\n')
 
         version = int(parsed[0].text)
         servers = int(parsed[1].text)
@@ -187,7 +153,7 @@ class Monitor:
             A :obj:`list` of :obj:`Client` data class objects for each client
 
         """
-        parsed = self._send_get_command(b'get clientlist\r\n')
+        parsed = self._send_message(b'get clientlist\r\n')
 
         client_list = []
 
@@ -221,7 +187,7 @@ class Monitor:
             A :obj:`list` of :obj:`Plugin` data class objects for each client
 
         """
-        parsed = self._send_get_command(b'get pluglist\r\n')
+        parsed = self._send_message(b'get pluglist\r\n')
 
         plugin_list = []
 
@@ -242,7 +208,7 @@ class Monitor:
             A :obj:`list` of :obj:`ServerListItem` data class objects for each client
 
         """
-        parsed = self._send_get_command(b'get srvlist\r\n')
+        parsed = self._send_message(b'get srvlist\r\n')
 
         server_list = []
 
@@ -269,7 +235,7 @@ class Monitor:
         command = bytearray(b'get jobinfo ')
         command.extend(server_handle.encode('utf-8'))
         command.extend(b'\r\n')
-        parsed = self._send_get_command(command)
+        parsed = self._send_message(command)
 
         version = int(parsed[0][0].text)
         name = str(parsed[0][1].text)
@@ -335,7 +301,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobHandleListItem` data class objects for each job
 
         """
-        parsed = self._send_get_command(b'get jobhlist\r\n')
+        parsed = self._send_message(b'get jobhlist\r\n')
 
         job_handle_list = []
 
@@ -355,7 +321,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobListItem` data class objects for each job
 
         """
-        parsed = self._send_get_command(b'get joblist\r\n')
+        parsed = self._send_message(b'get joblist\r\n')
 
         job_list = []
 
@@ -384,7 +350,7 @@ class Monitor:
         command = bytearray(b'get jobinfo ')
         command.extend(job_handle.encode('utf-8'))
         command.extend(b'\r\n')
-        parsed = self._send_get_command(command)
+        parsed = self._send_message(command)
 
         version = int(parsed[0][0].text)
         job_handle = int(parsed[0][1].text)
@@ -486,22 +452,15 @@ class Monitor:
         job = BDC.Job(job_info, job_flags, job_plugin, job_alerts, job_server_list)
         return job    
 
-    def get_taskname(self, job_handle):
-        '''TODO: Research and implement this fucntion'''
+    def get_jobstate(self, job_handle):
+        '''TODO: Research and implement this function'''
         
         return None
 
-    def del_controller(self, state):
-        '''TODO: Research and implement this function
+    def get_taskname(self, job_handle):
+        '''TODO: Research and implement this function'''
         
-        This command has been observed to happen in conjuction with adjusting the state of a job, e.g:
-
-        >del controller Yes
-        >set jobstate 1256275308 1
-        >del controller No
-
-        What del exactly means or what it does is slightly unclear
-        '''
+        return None
 
     def get_jobarchive(self):
         """Retrieve the job archive list
@@ -510,7 +469,7 @@ class Monitor:
             A :obj:`list` of :obj:`JobArchiveListItem` data class objects for each job
 
         """
-        parsed = self._send_get_command(b'get jobarchive\r\n')
+        parsed = self._send_message(b'get jobarchive\r\n')
 
         job_archive_list = []
 
@@ -534,3 +493,15 @@ class Monitor:
 
         TODO: Implement this function
         """
+
+    def del_controller(self, state):
+        '''TODO: Research and implement this function
+        
+        This command has been observed to happen in conjuction with adjusting the state of a job, e.g:
+
+        >del controller Yes
+        >set jobstate 1256275308 1
+        >del controller No
+
+        What del exactly means or what it does is slightly unclear
+        '''
