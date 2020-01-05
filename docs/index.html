@@ -85,7 +85,7 @@ establishing a connection and sending requests via TCP.</p>
 <dl class="simple">
 <dt>When opening a successful connection with Manager, it will send two packets:</dt><dd><ol class="arabic simple">
 <li><p>“250 backburner 1.0 Ready.”</p></li>
-<li><p>“backburner&gt;”</p></li>
+<li><p>“backburner&gt;” or ‘backburner(Controller)&gt;’</p></li>
 </ol>
 </dd>
 </dl>
@@ -156,12 +156,23 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Monitor.Monitor.get_job_list">
-<code class="sig-name descname">get_job_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_job_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the server list</p>
+<dt id="Monitor.Monitor.get_job_handle_list">
+<code class="sig-name descname">get_job_handle_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_job_handle_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the job handle list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">JobListItem</span></code> data class objects for each client</p>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">JobHandleListItem</span></code> data class objects for each job</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_job_list">
+<code class="sig-name descname">get_job_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_job_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the job list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">JobListItem</span></code> data class objects for each job</p>
 </dd>
 </dl>
 </dd></dl>
@@ -178,6 +189,89 @@ establishing a connection and sending requests via TCP.</p>
 <dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">Job</span></code> data class object containing information on the requested server</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_jobstate">
+<code class="sig-name descname">get_jobstate</code><span class="sig-paren">(</span><em class="sig-param">job_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_jobstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the state of specified job</p>
+<dl class="simple">
+<dt>Jobstates:</dt><dd><p>0 Completed
+1 Not started
+2 Active
+3 Suspended (presumably)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job_handle</strong> (<em>str</em>) – The handle of the server. You might find a hex value for this, convert this first to decimal value!</p></li>
+<li><p><strong>jobstate</strong> (<em>int</em>) – Jobstate as int. TODO: Find out values of jobstates</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a three element tuple containing the response code (int), job state as int (str) and empty requested data (bytes).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.set_jobstate">
+<code class="sig-name descname">set_jobstate</code><span class="sig-paren">(</span><em class="sig-param">job_handle</em>, <em class="sig-param">jobstate</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.set_jobstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the state of specified job</p>
+<dl class="simple">
+<dt>Jobstates:</dt><dd><p>0 Completed
+1 Not started
+2 Active
+3 Suspended (presumably)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job_handle</strong> (<em>str</em>) – The handle of the server. You might find a hex value for this, convert this first to decimal value!</p></li>
+<li><p><strong>jobstate</strong> (<em>int</em>) – Jobstate as int. TODO: Find out values of jobstates</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a three element tuple containing the response code (int), response message (str) and empty requested data (bytes). If succesful, the response will be ‘200 OK’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_taskname">
+<code class="sig-name descname">get_taskname</code><span class="sig-paren">(</span><em class="sig-param">job_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_taskname" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Research and implement this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.get_jobarchive">
+<code class="sig-name descname">get_jobarchive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.get_jobarchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the job archive list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">JobArchiveListItem</span></code> data class objects for each job</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.set_jobarchive">
+<code class="sig-name descname">set_jobarchive</code><span class="sig-paren">(</span><em class="sig-param">job_handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.set_jobarchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send or retrieve specified job to or from job archive</p>
+<p>TODO: Implement this function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Monitor.Monitor.del_controller">
+<code class="sig-name descname">del_controller</code><span class="sig-paren">(</span><em class="sig-param">state</em><span class="sig-paren">)</span><a class="headerlink" href="#Monitor.Monitor.del_controller" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: Research and implement this function</p>
+<p>This command has been observed to happen in conjuction with adjusting the state of a job, e.g:</p>
+<p>&gt;del controller Yes
+&gt;set jobstate 1256275308 1
+&gt;del controller No</p>
+<p>What del exactly means or what it does is slightly unclear</p>
 </dd></dl>
 
 </dd></dl>
@@ -542,9 +636,120 @@ establishing a connection and sending requests via TCP.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="BackburnerDataClasses.JobArchiveListItem">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobArchiveListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">user: str</em>, <em class="sig-param">description: str</em>, <em class="sig-param">submission_date: str</em>, <em class="sig-param">end_job_date: str</em>, <em class="sig-param">plugin_name: str</em>, <em class="sig-param">plugin_version: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.user">
+<code class="sig-name descname">user</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.user" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.description" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.submission_date">
+<code class="sig-name descname">submission_date</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.submission_date" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.end_job_date">
+<code class="sig-name descname">end_job_date</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.end_job_date" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.plugin_name">
+<code class="sig-name descname">plugin_name</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobArchiveListItem.plugin_version">
+<code class="sig-name descname">plugin_version</code><a class="headerlink" href="#BackburnerDataClasses.JobArchiveListItem.plugin_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="BackburnerDataClasses.JobHandleListItem">
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobHandleListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: int</em>, <em class="sig-param">state: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobHandleListItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Item in Job Handle List</p>
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobHandleListItem.handle">
+<code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobHandleListItem.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobHandleListItem.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#BackburnerDataClasses.JobHandleListItem.state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="BackburnerDataClasses.JobListItem">
-<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: int</em>, <em class="sig-param">state: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobListItem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Job item in list</p>
+<em class="property">class </em><code class="sig-prename descclassname">BackburnerDataClasses.</code><code class="sig-name descname">JobListItem</code><span class="sig-paren">(</span><em class="sig-param">handle: int</em>, <em class="sig-param">state: int</em>, <em class="sig-param">name: str</em>, <em class="sig-param">plugin_name: str</em>, <em class="sig-param">plugin_version: int</em><span class="sig-paren">)</span><a class="headerlink" href="#BackburnerDataClasses.JobListItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Item in Job List</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.JobListItem.handle">
 <code class="sig-name descname">handle</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.handle" title="Permalink to this definition">¶</a></dt>
@@ -558,6 +763,36 @@ establishing a connection and sending requests via TCP.</p>
 <dl class="attribute">
 <dt id="BackburnerDataClasses.JobListItem.state">
 <code class="sig-name descname">state</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobListItem.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobListItem.plugin_name">
+<code class="sig-name descname">plugin_name</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.plugin_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="BackburnerDataClasses.JobListItem.plugin_version">
+<code class="sig-name descname">plugin_version</code><a class="headerlink" href="#BackburnerDataClasses.JobListItem.plugin_version" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>int</p>
@@ -1447,7 +1682,7 @@ The following example is the server’s setting for a day where the computer is 
       &copy;2019, Haryo Sukmawanto.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
